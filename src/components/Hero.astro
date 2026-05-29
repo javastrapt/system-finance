@@ -1,0 +1,88 @@
+---
+import "../styles/global.css";
+import siteData from '../data/site.json';
+
+const pathname = Astro.url.pathname;
+const pagePath = pathname === '/' ? pathname : pathname.replace(/\/+$/, '');
+
+const pages = siteData.find(
+    item => item.id === 'site'
+)?.pages ?? [];
+
+const currentPage = pages.find(page => page.slug === pagePath);
+
+if (!currentPage) {
+    throw new Error(`No page found for ${pathname}`)
+}
+
+const hero = currentPage.hero;``
+
+---
+
+<div class="col-12 bg-dark text-secondary px-4 py-5">
+  <div class="hero container py-5">
+    <h1 class="display-5 fw-bold text-white mb-2 hero-title">{hero.title}</h1>
+    <p class="hero-subtitle fs-5 mb-5">{hero.subtitle}</p>
+    <div class="d-flex align-items-center justify-content-">
+
+        <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" data-bs-toggle='modal' data-bs-target='#addRecord' id='btn-add-record'>Add Record</button> 
+        <button type="button" class="btn btn-outline-light btn-lg px-4" data-bs-toggle='modal' data-bs-target='#viewSummary' id='btn-view-summary'>View Summary</button>
+    </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addRecord" tabindex="-1" aria-hidden="true"> 
+      <div class="modal-dialog"> 
+        <div class="modal-content rounded-4 shadow"> 
+          <div class="modal-header border-bottom-0"> 
+            <h1 class="modal-title fs-5">Add Record</h1> 
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
+          </div> 
+          
+          <div class="modal-body py-0"> 
+            <p>Functionality coming soon.</p> 
+          </div> 
+          <div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0"> 
+            <button type="button" class="btn btn-lg btn-primary">"Sure, Jan"</button> 
+            <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">Close</button> 
+          </div> 
+        </div> 
+      </div> 
+    </div>
+
+    <!-- View summary modal  -->
+
+    <div class="modal fade" id="viewSummary" tabindex="-1" aria-hidden="true"> 
+      <div class="modal-dialog"> 
+        <div class="modal-content rounded-4 shadow"> 
+          <div class="modal-header border-bottom-0"> 
+            <h1 class="modal-title fs-5">View Summary</h1> 
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
+          </div> 
+          
+          <div class="modal-body py-0"> 
+            <p>Summary coming soon...</p> 
+          </div> 
+          <div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0"> 
+            <button type="button" class="btn btn-lg btn-primary">"Sure, Jan"</button> 
+            <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">Close</button> 
+          </div> 
+        </div> 
+      </div> 
+    </div>
+
+<script>
+    // DOM
+    const btnAddRecord = document.getElementById('btn-add-record');
+    const btnSummary = document.getElementById('btn-view-summary')
+
+    // LISTENERS
+
+    // FUNCTIONS
+</script>
+
+<style>
+
+
+
+</style>

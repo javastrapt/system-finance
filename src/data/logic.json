@@ -1,0 +1,7 @@
+{
+    "pathname": "Astro.url.pathname",
+    "pages": "siteData.find((item) => item.id === 'site')?.pages ?? []",
+    "currentPage": "pages.find(page => page.slug === pathname",
+    "appName": "currentPage.hero.title",
+    "description": "currentPage.hero.subtitle"
+}

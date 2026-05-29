@@ -1,0 +1,37 @@
+---
+import siteData from "../data/site.json";
+import "../styles/footer.css";
+
+
+const site = siteData.find((item) => item.id === "site");
+const pages = site.pages;
+
+const org = siteData.find((item) => item.id === "org");
+const orgName = org.name;
+const orgLogo = org.logo;
+const address = org.address;
+
+const year = new Date().getFullYear();
+---
+
+<footer
+  class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top bg-dark text-light">
+>
+  <p class="col-md-4 mb-0 text-body-secondary">© {year}, {org.name}</p>
+  <a
+    href="/"
+    class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
+    aria-label="sytemflo"
+  >
+  <img src = {orgLogo} alt='system-flo-logo' />
+  </a>
+  <ul class="nav col-md-4 justify-content-end">
+    {
+        pages.map((page) => (
+        <li class="nav-item">
+      <a href={page.slug} class="nav-link px-2 text-body-secondary">{page.name}</a>
+    </li>    
+    ))
+    }
+    </ul>
+</footer>

@@ -1,0 +1,58 @@
+[
+    {
+        "id": "site",
+        "name": "System Finance",
+        "domain": "systemflo.org",
+        "pages": [
+            {
+                "name": "Home",
+                "slug": "/",
+                "type": "Static",
+                "hero": {
+                    "title": "Welcome to SystemFLO",
+                    "subtitle": null
+                }
+            },
+            {
+                "name": "System Finance",
+                "slug": "/finance",
+                "type": "webapp",
+                "desc": "Income vs Expense, data-table of recorded transactions and simple calculator - no hastle, minimal",
+                "hero": {
+                    "title": "System Finance",
+                    "subtitle": "Simply simple, because I simply barely know what I'm doing"
+                },
+                "bgimage": "https://www.tinyurl.com/systemimg-finance" 
+            },
+            {
+                "name": "Contact",
+                "slug": "/contact",
+                "type": "form",
+                "desc": "Get into contact with the site administration and communicate any questions or concerns.",
+                "hero": {
+                    "title": "Contact Us",
+                    "subtitle": "Questions, comments, yes, even concerns...."
+                }
+            }
+        ]
+    },
+    {
+        "id": "app",
+        "name": "System Finance",
+        "desc": "Simple Income/Expense tabulation app that keeps all records and does simple financial statistics as a summary",
+        "keywords": ["finance", "mathematical", "calculator", "tabulation", "record-keeping", "json-data", "database-free"]
+    },
+    {
+        "id": "org",
+        "name": "System FLO",
+        "address": {
+            "line1": "PO Box 123",
+            "line2": null,
+            "city": "Turlock",
+            "state": "CA",
+            "zip": "95382"
+        },
+        "ceo": "Michael Flores",
+        "logo": "https://www.tinyurl.com/systemflo-white"
+    }
+]

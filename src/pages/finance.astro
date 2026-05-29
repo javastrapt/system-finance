@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import siteData from '../data/site.json';
+
+import transactions from "../data/transactions.json";
+
+const sortedTransactions = [...transactions].sort(
+  (a, b) => new Date(b.postDate) - new Date(a.postDate)
+);
+---
+
+<BaseLayout title="Finance">
+  <Hero />
+
+  <div class='container'>
+  <table class='table table-responsive table-striped table-hover'>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>PostDate</th>``
+        <th>Amount</th>
+        <th>Service</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        sortedTransactions.map((transaction) => (
+          <tr>
+            <td>{transaction.transId}</td>
+            <td>{transaction.type}</td>
+            <td>{transaction.desc}</td>
+            <td>{transaction.postDate}</td>
+            <td>{Intl.NumberFormat('en-US', {
+              style: "currency",
+              currency: "USD"
+            }).format(transaction.amount)}</td>
+            <td>{transaction.service}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+  </div>
+
+
+</BaseLayout>
