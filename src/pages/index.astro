@@ -2,79 +2,89 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import siteData from '../data/site.json';
-
 import transactions from '../data/transactions.json';
 
 const sortedTransactions = [...transactions].sort(
-(a, b) => new Date(b.postDate) - new Date(a.postDate));
+(a, b) => new Date(b.postDate) - new Date(a.postDate)
+);
 
-const latestRecord = sortedTransactions.shift();
-const latestPostDate = latestRecord.postDate;
-
-
-const pathname = Astro.url.pathname;
-const pagePath = pathname === '/' ? pathname : pathname.replace(/\/+$/, '');
 const pages = siteData.find((item) => item.id === 'site')?.pages ?? [];
-const currentPage = pages.find(page => page.slug === pagePath);
-
-const apps = pages.filter((page) => page.type === 'webapp')
+const apps = pages.filter((page) => page.type === 'webapp');
+const latestRecord = sortedTransactions[0];
+const latestPostDate = latestRecord
+  ? new Intl.DateTimeFormat('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    }).format(new Date(latestRecord.postDate))
+  : 'No records yet';
 
 ---
 
 <BaseLayout title='Home'>
   <Hero />
 
-  <div class='container col-12 mt-4'>
+  <section class='apps-showcase mt-4'>
     {
       apps.map((app) => (
-        <div class='card text-bg-dark'>
-              <img src={app.bgimage} alt='finance'>
-              <div class='card-img-overlay'>
-                <h2 class='card-title fw-bold'>{app.name}</h2>
-                <p class='card-text'>{app.desc}</p>
-                <p class='card-text'><small>Last Transaction: <strong>{latestPostDate}</strong></small></p>
-                <div class='col'>
-                <a href={app.slug} type='button' class='btn btn-primary btn-sm'>Launch {app.name}</a>
-                </div>
-              </div>
-            </div>      
-            ))
-          }
-    </div>
-  </BaseLayout>
+        <article class='app-card card text-bg-dark'>
+          <img src={app.bgimage} alt={`${app.name} preview`} loading='lazy'>
+          <div class='card-img-overlay app-card-overlay'>
+            <h2 class='card-title fw-bold'>{app.name}</h2>
+            <p class='card-text'>{app.desc}</p>
+            <p class='card-text'><small>Last Transaction: <strong>{latestPostDate}</strong></small></p>
+            <div class='col'>
+              <a href={app.slug} class='btn btn-primary btn-sm'>Launch {app.name}</a>
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </section>
+</BaseLayout>
 <style>
-
-.container {
+.apps-showcase {
   width: 100%;
   display: flex;
   align-items: center;
-  justifey-content: space-around;
+  justify-content: center;
 }
 
-.card {
-    width: 800px;
-    height: 600px;
-  }
-  .card img {
-    max-height: 600px;
-    max-width: 800px;
-    background-image-size: cover;
-    background-blend-mode: overlay;
-    backdrop-filter: blur(30px);
-  }
-  
-  .card-img-overlay {
+.app-card {
+  width: min(100%, 800px);
+  min-height: 32rem;
+  border: 0;
+  overflow: hidden;
+}
+
+.app-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.app-card-overlay {
   background-color: rgba(255, 255, 255, 0.4);
   -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur:(20px);
+  backdrop-filter: blur(20px);
   padding: 20px;
-  margin: 2rem 4rem;
+  margin: 2rem;
   font-weight: bold;
-  height: 50%;
-  width: 80%;
+  min-height: 50%;
+  width: auto;
   display: flex;
-  align-items: left;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .app-card {
+    min-height: 24rem;
+  }
+
+  .app-card-overlay {
+    margin: 1rem;
+  }
 }
 </style>

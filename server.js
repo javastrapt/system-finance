@@ -9,8 +9,8 @@ const DataFilePath = "./src/data/transactions.json";
 
 app.use(express.json());
 app.use(cors({
-    origin: "http://localhost: 4321"
-}))
+    origin: "http://localhost:4321"
+}));
 
 app.get('/', (req, res) => {
     res.send('system ready....')
@@ -20,10 +20,10 @@ app.get('/api/transactions', (req, res) => {
     try {
         const fileData = fs.readFileSync(DataFilePath, 'utf-8');
         const json = JSON.parse(fileData);
-        res.json(json)
+        res.json(json);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: message })
+        res.status(500).json({ error: err.message });
     }
 });
 
@@ -33,9 +33,9 @@ app.post('/api/transactions', (req, res) => {
         const fileData = fs.readFileSync(DataFilePath, 'utf-8');
         const json = JSON.parse(fileData);
 
-        const newId = json.lnegth > 0
+        const newId = json.length > 0
         ? Math.max(...json.map(item => Number(item.transId) || 0)) + 1
-        : 2600
+        : 2600;
 
         const newEntry = {
             transId: newId,
@@ -44,18 +44,18 @@ app.post('/api/transactions', (req, res) => {
 
         json.push(newEntry);
 
-        fs.writeFileSync(DataFilePath, JSON.stringify(json, null, 2))
+        fs.writeFileSync(DataFilePath, JSON.stringify(json, null, 2));
 
         res.json({
             message: 'Successfully created new record!',
             data: newEntry
-        })
+        });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: message })
+        res.status(500).json({ error: err.message });
     }
-})
+});
 
 app.listen(Port, () => {
-    console.log(`Port portin' per port ${Port}`)
-})
+    console.log(`Port portin' per port ${Port}`);
+});

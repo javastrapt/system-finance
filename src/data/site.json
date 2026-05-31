@@ -17,7 +17,7 @@
                 "name": "System Finance",
                 "slug": "/finance",
                 "type": "webapp",
-                "desc": "Income vs Expense, data-table of recorded transactions and simple calculator - no hastle, minimal",
+                "desc": "Income vs expense tracking, a transaction table, and a simple calculator with a minimal setup.",
                 "hero": {
                     "title": "System Finance",
                     "subtitle": "Simply simple, because I simply barely know what I'm doing"
@@ -43,6 +43,74 @@
         "keywords": ["finance", "mathematical", "calculator", "tabulation", "record-keeping", "json-data", "database-free"]
     },
     {
+        "id": "footer",
+        "sections": [
+            {
+                "name": "The Apps",
+                "links": [
+                    {
+                        "label": "The Financer",
+                        "slug": "/finance"
+                    },
+                    {
+                        "label": "The Convertor",
+                        "slug": "/convertor"
+                    },
+                    {
+                        "label": "The Metronome",
+                        "slug": "/met" 
+                    },
+                    {
+                        "label": "The Cardiashians",
+                        "slug": "/cards"
+                    },
+                    {
+                        "label": "The Scraper",
+                        "slug": "/scraper"
+                    }
+                ]
+            },
+            {
+                "name": "Quick Links",
+                "links": [
+                    {
+                        "label": "Home",
+                        "slug": "/"
+                    },
+                    {
+                        "label": "Apps",
+                        "slug": "/apps"
+                    },
+                    {
+                        "label": "About",
+                        "slug": "/about"
+                    },
+                    {
+                        "label": "Contact",
+                        "slug": "/contact"
+                    }
+                    ]
+                },
+                {
+                    "name": "About",
+                    "links": [
+                        {
+                            "label": "Privacy Policy",
+                            "slug": "/privacy"
+                        },
+                        {
+                            "label": "Fair Use Policy",
+                            "slug": "/fair"
+                        },
+                        {
+                            "label": "Terms of Service",
+                            "slug": "/tos"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
         "id": "org",
         "name": "System FLO",
         "address": {
