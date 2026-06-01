@@ -5,7 +5,7 @@ import siteData from '../data/site.json';
 import transactions from '../data/transactions.json';
 
 const sortedTransactions = [...transactions].sort(
-(a, b) => new Date(b.postDate) - new Date(a.postDate)
+(a, b) => Number(new Date(b.postDate)) - Number(new Date(a.postDate))
 );
 
 const pages = siteData.find((item) => item.id === 'site')?.pages ?? [];
@@ -27,12 +27,11 @@ const latestPostDate = latestRecord
   <section class='apps-showcase mt-4'>
     {
       apps.map((app) => (
-        <article class='app-card card text-bg-dark'>
-          <img src={app.bgimage} alt={`${app.name} preview`} loading='lazy'>
-          <div class='card-img-overlay app-card-overlay'>
+        <article class='app-card  card'>
+          <div class='card-body'>
             <h2 class='card-title fw-bold'>{app.name}</h2>
             <p class='card-text'>{app.desc}</p>
-            <p class='card-text'><small>Last Transaction: <strong>{latestPostDate}</strong></small></p>
+            <p class='card-text'><small>last record added:: <strong>{latestPostDate}</strong></small></p>
             <div class='col'>
               <a href={app.slug} class='btn btn-primary btn-sm'>Launch {app.name}</a>
             </div>

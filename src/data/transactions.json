@@ -2,10 +2,10 @@
   {
     "transId": 0,
     "type": "Charge",
-    "desc": "Testing",
+    "desc": "Testing, Bitch",
     "postDate": "2024-06-01",
     "amount": 0,
-    "service": "Zelle"
+    "service": "Anita Men-ZELLE"
   },
   {
     "transId": 1,
@@ -181,6 +181,14 @@
     "desc": "Payment Received",
     "postDate": "2026-05-04",
     "amount": "60.00",
+    "service": "Zelle"
+  },
+  {
+    "transId": 23,
+    "type": "Payment",
+    "desc": "Payment Received",
+    "postDate": "2026-05-28",
+    "amount": 500.00,
     "service": "Zelle"
   }
 ]
