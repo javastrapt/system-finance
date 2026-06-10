@@ -1,15 +1,24 @@
 ---
+/** Imports */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
 import siteData from '../data/site.json';
+import FullHero from '../components/HeroFP.astro';
+import LeftHero from "../components/HeroLA.astro";
 import transactions from '../data/transactions.json';
+import "../styles/herofp.css";
 
+/** Site Data */
+const pathname = Astro.url.pathname;
+const pages = siteData.find((item) => item.id === 'site')?.pages ?? [];
+const apps = pages.filter((page) => page.type === 'webapp');
+const currentPage = pages.filter((page) => page.slug === pathname);
+const hero = currentPage.hero;
+const subtitle = currentPage.subtitle;
+
+/** Logic */
 const sortedTransactions = [...transactions].sort(
 (a, b) => Number(new Date(b.postDate)) - Number(new Date(a.postDate))
 );
-
-const pages = siteData.find((item) => item.id === 'site')?.pages ?? [];
-const apps = pages.filter((page) => page.type === 'webapp');
 const latestRecord = sortedTransactions[0];
 const latestPostDate = latestRecord
   ? new Intl.DateTimeFormat('en-US', {
@@ -21,60 +30,168 @@ const latestPostDate = latestRecord
 
 ---
 
-<BaseLayout title='Home'>
-  <Hero />
+<BaseLayout>
+  <FullHero />
 
-  <section class='apps-showcase mt-4'>
+  <section class='app-showcase d-flex align-items-center flex-rowgap-5 py-3 px-4 bg-dark text-light'>
     {
       apps.map((app) => (
-        <article class='app-card  card'>
-          <div class='card-body'>
-            <h2 class='card-title fw-bold'>{app.name}</h2>
-            <p class='card-text'>{app.desc}</p>
-            <p class='card-text'><small>last record added:: <strong>{latestPostDate}</strong></small></p>
-            <div class='col'>
-              <a href={app.slug} class='btn btn-primary btn-sm'>Launch {app.name}</a>
-            </div>
-          </div>
-        </article>
+
+      // Begin card component
+        <article class='app-card card text-bg-dark'>
+          <img src={app.image} class='card-img' alt={app.name}"-image">
+
+          {/* // Image & Text Overlay */}
+          <div class='card-img-overlay d-flex flex-column justify-content-start'>
+              <h2 class='card-title card-title-area display-5 fw-light name text-light mb-5'>{app.name}</h2>
+
+              <p class='card-text card-body-area text-light mb-5'>{app.desc}</p>
+              {
+                app.name === "Finance" && (
+                  <p class='card-text card-meta-area text-light mb-5'><small>last record added:: <strong>{latestPostDate}</strong></small></p>
+              )}
+              <div class='card-button-area'>
+                <a href={app.slug} class='btn btn-primary btn-lg'>
+                  Launch {app.name}
+                </a>
+              </div>
+      </article>
       ))
     }
   </section>
 </BaseLayout>
-<style>
-.apps-showcase {
+<script>
+  
+  const astroPathname = "/";
+  const windowPathname = window.location.pathname;
+  if (astroPathname !== windowPathname) {
+    console.info('Warning: Pathnames do not match: ${astroPathname} : ${windowPathname}')
+  } else {
+    console.info(`Pathname match: \nWindowPathname: ${windowPathname} : \nAstroPathname: ${astroPathname}`)
+  }
+</script>
+  <style>
+
+/* App Showcase */
+.app-showcase {
   width: 100%;
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2 minmax(200px, 500px));
+  gap: 20px;
+  place-items: center;
   justify-content: center;
+  grid-auto-rows: 
+  auto
+  1fr
+  auto
+  auto;
 }
 
 .app-card {
-  width: min(100%, 800px);
+  width: 100%;
+  position: relative;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 4;
   min-height: 32rem;
+  max-width: 500px;
   border: 0;
+  border-radius: 12px;
   overflow: hidden;
+  text-wrap: wrap;
 }
-
-.app-card img {
+.app-card .card-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.app-card-overlay {
-  background-color: rgba(255, 255, 255, 0.4);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
+.app-card:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0.15)
+  );
+  z-index: 1;
+}
+.card-img-overlay {
+  grid-row: 1/ -1;
+  grid-column: 1;
+  z-index: 2;
+
+  display: grid;
+  grid-template-rows: subgrid;
   padding: 20px;
   margin: 2rem;
-  font-weight: bold;
-  min-height: 50%;
-  width: auto;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
+  position: relative;
+}
+.card-img-overlay > * {
+  position: relative;
+  z-index: 4;
+}
+
+.app-card::after,
+.card-img-overlay::before {
+  pointer-events: none;
+}
+.card-img-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 8px;
+  z-index: -1;
+}
+.app-card .card-img {
+  grid-row: 1 / -1;
+  grid-column: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.app-card .card-img-overlay {
+  z-index: 1;
+}
+
+.app-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0.15)
+  );
+  z-index: 1;
+}
+
+.card-title-area {
+  grid-row: 1;
+  letter-spacing: .2rem
+}
+
+.card-body-area {
+  grid-row: 2;
+}
+
+.card-meta-area {
+  grid-row: 3
+}
+
+.card-button-area {
+  grid-row: 4
+  position: relative;
+  z-index: 4;
+  align-self: end;
+}
+
+.card-button-area .btn {
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {

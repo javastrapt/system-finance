@@ -1,14 +1,18 @@
 ---
+import '../styles/navbar.css';
 import siteData from '../data/site.json';
 
+const pathname = Astro.url.pathname;
 const site = siteData.find((item) => item.id === 'site');
 const pages = site.pages;
+const currentPage = pages.find((page) => page.slug === pathname)
+
 ---
 
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-  <div class="container">
+<nav class="navbar navbar-expand-lg bg-dark text-light navbar-dark">
+  <div class='container'>
     <a class="navbar-brand" href="/">
-      <img src='https://www.tinyurl.com/systemflo-white' alt='systemflo-logo'>
+      <img src='https://www.tinyurl.com/systemflo-white' alt='systemflo-logo' class='fade-in delay-6'>
     </a>
 
     <div class="collapse navbar-collapse">
@@ -24,18 +28,29 @@ const pages = site.pages;
     </div>
   </div>
 </nav>
-<style>
-  .navbar-brand img {
-    max-height: 70px;
-    width: auto;
-  }
 
-.nav-item .nav-link {
-    text-decoration: none;
-    transition: text-decoration .5s ease-in-out;
-  }
+<script>
 
-  .nav-item .nav-link:hover {
-    text-decoration: underline;
+const pathname = window.location.pathname;
+
+async function loadData() {
+  try {
+    const res = await fetch('http://localhost:3000/api/site')
+    const data = res.json();
+
+    const siteData = data;
+
+    const site = siteData.filter((item) => item.id === 'site');
+    const pages = site.pages;
+    const currentPage = pages.find((page) => page.slug === pathname)
+
+    console.log(`Pathname: ${pathname}\ncurrentPage: ${currentPage}\nPages: ${pages.length}`);
+  } catch (err) {
+    console.error(err);
   }
-</style>
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  loadData()
+});s
+</script>

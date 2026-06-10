@@ -188,7 +188,15 @@
     "type": "Payment",
     "desc": "Payment Received",
     "postDate": "2026-05-28",
-    "amount": 500.00,
+    "amount": "500.00",
+    "service": "Zelle"
+  },
+  {
+    "transId": 24,
+    "type": "Charge",
+    "desc": "June 2026 Rent",
+    "postDate": "2026-06-01",
+    "amount": "1069.43",
     "service": "Zelle"
   }
 ]

@@ -9,20 +9,41 @@
                 "slug": "/",
                 "type": "Static",
                 "hero": {
-                    "title": "Welcome to SystemFLO",
-                    "subtitle": null
+                    "title": "SystemFLO",
+                    "subtitle": "Your new workflo..."
                 }
             },
             {
-                "name": "System Finance",
+                "name": "Finance",
                 "slug": "/finance",
                 "type": "webapp",
                 "desc": "Income vs expense tracking, a transaction table, and a simple calculator with a minimal setup.",
                 "hero": {
-                    "title": "System Finance",
+                    "title": "Finance",
                     "subtitle": "Simply simple, because I simply barely know what I'm doing"
                 },
-                "bgimage": "https://www.tinyurl.com/systemimg-finance" 
+                "image": "https://www.tinyurl.com/systemimg-finance" 
+            },
+            {
+                "name": "Metronome",
+                "slug": "/met",
+                "type": "webapp",
+                "desc": "Getting its start as a simple metronome application with basic tempo adjusters and subdivision selectors, this app will eventually feature individual tempo memorybanks, customized accell/rit algorithms (algorhythnms) and the abililty to program all the tempo changes of an entire musical work as desired. Dr. Beat Who?",
+                "hero": {
+                    "title": "Metronome",
+                    "subtitle": "Poco a poco...and always in time"
+                },
+                "image": "../metronome.png"
+            },
+            {
+                "namen": "Bootstrap Reference",
+                "slug": "/reference",
+                "type": "Static",
+                "desc": "A quick Bootstrap Utilities Cheat-Sheet",
+                "hero": {
+                    "title": "Bootstrap Reference Cards",
+                    "subtitle": "...this is more for me than for you"
+                }
             },
             {
                 "name": "Contact",
@@ -30,7 +51,7 @@
                 "type": "form",
                 "desc": "Get into contact with the site administration and communicate any questions or concerns.",
                 "hero": {
-                    "title": "Contact Us",
+                    "title": "Cont`act Us",
                     "subtitle": "Questions, comments, yes, even concerns...."
                 }
             }

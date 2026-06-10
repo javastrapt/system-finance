@@ -1,0 +1,112 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/met.css";
+
+// Data
+import siteData from '../data/site.json';
+
+const pathname = Astro.url.pathname;
+const pagePath = pathname === '/' ? pathname : pathname.replace(/\/+$/, '');
+
+const pages = siteData.find(
+    item => item.id === 'site'
+)?.pages ?? [];
+
+const currentPage = pages.find(page => page.slug === pagePath);
+    
+if (!currentPage) {
+    throw new Error(`No page found for ${pathname}`)
+}
+
+const hero = currentPage.hero;
+
+---
+<BaseLayout title={currentPage.name}'>
+    <main class = 'container d-flex w-100 h-100 align-items-center justify-content-center flex-column"'>
+        
+        <section class='hero justify-content-center align-items-start mb-0'>
+            <article class='page-title text-center'>
+                <p class='reveal d-4 fw-light text-lowercase' style='letter-spacing: .2rem'>system</p>
+                <h1 class='reveal d-1 fw-light display-5'>Metronome</h1>
+            </article>
+        </section>
+
+        <section class='metronome col-12 justify-content-center align-items-center reveal d-4 mb-4'>
+            <div class='tempo-display text-center'>
+                <span class='tempo'>140</span>
+                <span class='bpm'>BPM</span>
+            </div>
+            <div class='tempo-text mb-4'>Allegretto</div>
+            <div class='tempo-settings mb-4'>
+                <div class='tempo-adjust decrease'>-</div>
+                <input type='range' class='slider' min='20' max='255' step="1">
+                <div class='tempo-adjust increase'>+</div>
+            </div>
+
+            <div class='start-stop mb-4'>START</div>
+            <div class='measures'>
+                <div class='subtract-beats stepper'>-</div>
+                <div class='measure-count mx-3'>4</div>
+                <div class='add-beats stepper'>+</div>
+            </div>
+        </section>
+
+    </main>``
+</BaseLayout>
+
+<style>
+        .hero {
+            display: grid;
+            grid-template-columns: repeat(12, 1ft);
+            grid-template-rows: repeat(5, 1fr);
+            gap" 8px'
+        }
+
+        .hero .page-title {
+            grid-column: span 6 / span 6;
+            grid-column-start: 4;
+            grid-row-start: 2;
+        }
+
+        .metronome {
+            grid-column: span 4 / span 4
+        }
+
+
+    </style>
+
+
+
+    <!-- <div class='container d-flex align-items-center justify-content-center flex-column'>
+        
+        <section class='hero my-5 mx-4 col-12'>
+            <div class='title col-md-8 text-center'>
+                <h1 class='reveal d-1 fw-light display-5'>Metronome</h1>
+            </div>
+        </section>
+
+        <section class='metronome py-3 px-4 reveal d-4'>
+            <div class='tempo-display text-center mb-4'>
+                <span class='tempo'>140</span>
+                <span class='bpm'>BPM</span>
+            </div>
+            <div class='tempo-text mb-4'>Allegretto</div>
+            <div class='tempo-settings mb-4'>
+                <div class='tempo-adjust decrease'>-</div>
+                <input type='range' class='slider' min='20' max='255' step="1">
+                <div class='tempo-adjust increase'>+</div>
+            </div>
+
+            <div class='start-stop mb-4'>START</div>
+            <div class='measures'>
+                <div class='subtract-beats stepper'>-</div>
+                <div class='measure-count mx-3'>4</div>
+                <div class='add-beats stepper'>+</div>
+            </div>
+            </div>
+        </section>
+    </div> -->
+    <script type='module' src="../js/met.js"></script>        
+
+
+</BasicLayout>

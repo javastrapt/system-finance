@@ -1,0 +1,26 @@
+---
+import siteData from '../data/site.json';
+
+const pathname= Astro.url.pathname;
+const site = siteData.find((item) => item.id ==='site')
+const pages = site.pages;
+const currentPage = pages.find((page) => page.slug === pathname);
+
+const hero = currentPage.hero;
+const image = currentPage.image;
+---
+<!-- Full-page Hero -->
+<section class='header full-hero px-3 py-4' aria-labelledby="hero-title">
+    <div class='hero-copy d-flex align-items-center justify-content-center'>
+      <img class='fade-in delay-3' src="https://tinyurl.com/systemflo-white" alt='systemflo'>
+    </div>
+  </section>
+
+  <style>
+    .hero-copy {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>

@@ -13,12 +13,15 @@
     --bluecolor3: white;
 }
 
-
-
 body {
   font-family: system-ui, sans-serif;
+}
+
+.navbar {
+  background-color: var(--nav-color);
 }
 
 h1 {
   font-weight: 700;
 }
+

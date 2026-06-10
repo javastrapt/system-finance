@@ -40,7 +40,7 @@ const today = Intl.DateTimeFormat("en-US", {
   <Hero>
     <div class="d-flex align-items-center">
       <button
-        type="button"
+      
         class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold"
         data-bs-toggle="modal"
         data-bs-target="#addRecord"
@@ -55,6 +55,7 @@ const today = Intl.DateTimeFormat("en-US", {
       >
     </div>
   </Hero>
+
   <section class="totals-container my-4">
     <div class="row">
       <div
@@ -289,3 +290,15 @@ const today = Intl.DateTimeFormat("en-US", {
     postDateEl?.focus();
   }
 </script>
+<style>
+  .modal {
+    backdrop-filter: blur(10px);
+  }
+
+  .hero {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
+</style>

@@ -1,0 +1,382 @@
+[
+    {
+        "id": "spacing",
+        "category": "Spacing",
+        "utilities": [
+            {
+                "code": "m",
+                "element": "Margin",
+                "desc": "Controls the outer space around an element."
+            },
+            {
+                "code": "p",
+                "element": "Padding",
+                "desc": "Controls the inner space within an element."
+            },
+            {
+                "code": "t",
+                "element": "Top",
+                "desc": "Applies the spacing to the top side (e.g., mt-3, pt-2)."
+            },
+            {
+                "code": "b",
+                "element": "Bottom",
+                "desc": "Applies the spacing to the bottom side (e.g., mb-4, pb-1)."
+            },
+            {
+                "code": "s",
+                "element": "Start",
+                "desc": "Applies spacing to the left in LTR (Left-to-Right) layouts."
+            },
+            {
+                "code": "e",
+                "element": "End",
+                "desc": "Applies spacing to the right in LTR (Left-to-Right) layouts."
+            },
+            {
+                "code": "x",
+                "element": "X-Axis",
+                "desc": "Applies spacing to both the left and right sides horizontally."
+            },
+            {
+                "code": "y",
+                "element": "Y-Axis",
+                "desc": "Applies spacing to both the top and bottom sides vertically."
+            },
+            {
+                "code": "blank",
+                "element": "All sides",
+                "desc": "Using just m-3 or p-3 applies it to all four sides."
+            },
+            {
+                "code": "auto",
+                "element": "Automatic",
+                "desc": "m-auto, mx-auto, etc. (Used heavily for centering elements)."
+            },
+            {
+                "code": "0 to 5",
+                "element": "Size Scales",
+                "desc": "0 (eliminates space) up to 5 (maximum default spacing standard)."
+            }
+        ]
+    },
+    {
+        "id": "grid",
+        "category": "Grid & Layout",
+        "utilities": [
+            {
+                "code": "container",
+                "element": "Fixed Container",
+                "desc": "Centers content horizontally; responds to breakpoints."
+            },
+            {
+                "code": "row",
+                "element": "Grid Row",
+                "desc": "Wrapper for grid columns; ensures proper negative margin alignment."
+            },
+            {
+                "code": "col",
+                "element": "Grid Column",
+                "desc": "Dictates column spans (e.g., col-6 takes up half of the 12-column grid)."
+            },
+            {
+                "code": "g",
+                "element": "Gutter",
+                "desc": "Controls the padding/spacing between grid columns (gx-*, gy-*, g-*)."
+            },
+            {
+                "code": "d",
+                "element": "Display",
+                "desc": "Changes the display property (e.g., d-none., d-block, d-flex, d-inline)."
+            },
+            {
+                "code": "v",
+                "element": "Visibility",
+                "desc": "Toggles visibility without affecting display layout (visible, invisible)."
+            },
+            {
+                "code": "pos",
+                "element": "Position",
+                "desc": "Sets positioning context (position-static, position-absolute, position-fixed)."
+            }
+        ]
+    },
+    {
+        "id": "flexbox",
+        "category": "Flexbox",
+        "utilities": [
+            {
+                "code": "flex-row",
+                "element": "Flex Direction",
+                "desc": "Standard horizontal row layout (flex-row-reverse flips it)."
+            },
+            {
+                "code": "flex-column",
+                "element": "Flex Column",
+                "desc": "Vertical column stack layout (flex-column-reverse)."
+            },
+            {
+                "code": "justify",
+                "element": "Justify Content",
+                "desc": "Aligns items horizontally (justify-content-start, -center, -between)."
+            },
+            {
+                "code": "align",
+                "element": "Align Items",
+                "desc": "Aligns items vertically (align-items-start, -center, -stretch)."
+            },
+            {
+                "code": "align-self",
+                "element": "Align Individual Item",
+                "desc": "Overrides layout alignment for a single child (align-self-center)."
+            },
+            {
+                "code": "wrap",
+                "element": "Flex Wrap",
+                "desc": "Permits items to wrap onto new lines (flex-wrap, flex-nowrap)."
+            },
+            {
+                "code": "order",
+                "element": "Visual Order",
+                "desc": "Rearranges the visual rendering order of flex items (order-1 to order-5)."
+            }
+        ]
+    },
+    {
+        "id": "sizing",
+        "category": "Sizing",
+        "utilities": [
+            {
+                "code": "w",
+                "element": "Width",
+                "desc": "Sets width percentages (w-25, w-50, w-75, w-100, w-auto)."
+            },
+            {
+                "code": "h",
+                "element": "Height",
+                "desc": "Sets height percentages (h-25, h-50, h-75, h-100, h-auto)."
+            },
+            {
+                "code": "mw",
+                "element": "Max Width",
+                "desc": "Sets maximum constraints (mw-100 means max-width: 100%;)."
+            },
+            {
+                "code": "mh",
+                "element": "Max Height",
+                "desc": "Sets maximum constraints (mh-100 means max-height: 100%;)."
+            },
+            {
+                "code": "vw",
+                "element": "Viewport Width",
+                "desc": "Sets size relative to screen width (vw-100)."
+            },
+            {
+                "code": "vh",
+                "element": "Viewport Height",
+                "desc": "Sets size relative to screen height (vh-100)."
+            }
+        ]
+    },
+    {
+        "id": "color",
+        "category": "Color & Background",
+        "utilities": [
+            {
+                "code": "text-",
+                "element": "color",
+                "desc": "Applied as text-primary, text-success, text-muted, text-white, etc."
+            },
+            {
+                "code": "bg-",
+                "element": "background-color",
+                "desc": "Applied as bg-dark, bg-light, bg-warning, bg-transparent."
+            },
+            {
+                "code": "link-",
+                "element": "Hover Link States",
+                "desc": "Styles native HTML anchors safely (link-danger, link-info)."
+            }
+        ]
+    },
+    {
+        "id": "text",
+        "category": "Text & Typogrophy",
+        "utilities": [
+            {
+                "code": "text-start",
+                "element": "Left Align",
+                "desc": "Aligns text to the left (respects RTL)."
+            },
+            {
+                "code": "text-end",
+                "element": "Right Align",
+                "desc": "Aligns text to the right (respects RTL)."
+            },
+            {
+                "code": "text-center",
+                "element": "Center Align",
+                "desc": "Centers text content."
+            },
+            {
+                "code": "fs",
+                "element": "Font Size",
+                "desc": "Sets font sizes matching heading sizes fs-1 (largest) to fs-6 (smallest)."
+            },
+            {
+                "code": "fw",
+                "element": "Font Weight",
+                "desc": "Changes weight (fw-bold, fw-normal, fw-light, fw-semibold)."
+            },
+            {
+                "code": "fst",
+                "element": "Font Style",
+                "desc": "Toggles italicization (fst-italic, fst-normal)."
+            },
+            {
+                "code": "lh",
+                "element": "Line Height",
+                "desc": "Adjusts spacing between text lines (lh-1, lh-sm, lh-base, lh-lg)."
+            },
+            {
+                "code": "text-wrap",
+                "element": "Text Wrapping",
+                "desc": "Forces or prevents line breaking (text-wrap, text-nowrap)."
+            }
+        ]
+    },
+    {
+        "id": "borders",
+        "category": "Borders & Effects",
+        "utilities": [
+            {
+                "code": "border",
+                "element": "Element Border",
+                "desc": "Standard boundary layout (border-0 removes it, border-top isolates it)."
+            },
+            {
+                "code": "rounded",
+                "element": "Border Radius",
+                "desc": "Rounds element corners (rounded-circle makes a ball, rounded-0 sharpens corners)."
+            },
+            {
+                "code": "shadow",
+                "element": "Box Shadow",
+                "desc": "Adds depth via shadows (shadow-none, shadow-sm, shadow, shadow-lg)."
+            }
+        ]
+    },
+    {
+        "id": "breakpoints",
+        "category": "Responsive Breakpoints",
+        "utilities": [
+            {
+                "code": "sm",
+                "element": ">= 576px",
+                "desc": "Landscape mobile/small tablets (Small)."
+            },
+            {
+                "code": "md",
+                "element": ">= 768px",
+                "desc": "Standard tablets (Medium)."
+            },
+            {
+                "code": "lg",
+                "element": ">= 992px",
+                "desc": "Laptops and small monitors (Large)."
+            },
+            {
+                "code": "xl",
+                "element": ">= 1200px",
+                "desc": "Desktop screens (Extra Large)."
+            },
+            {
+                "code": "xxl",
+                "element": ">= 1400px",
+                "desc": "Ultrawide and massive high-res displays (Extra Extra Large)."
+            }
+        ]
+    },
+    {
+        "id": "misc",
+        "category": "Misc. Layout & Behavioral",
+        "utilities": [
+            {
+                "code": "pe",
+                "element": "Pointer Events",
+                "desc": "Prevents or allows user click interactions (pe-none, pe-auto)."
+            },
+            {
+                "code": "user-select",
+                "element": "Text Selection",
+                "desc": "Controls if text can be highlighted/selected (user-select-none, user-select-all)."
+            },
+            {
+                "code": "overflow",
+                "element": "Overflow Management",
+                "desc": "Toggles clipped content (overflow-hidden, overflow-auto, overflow-scroll)."
+            },
+            {
+                "code": "float",
+                "element": "Element Floating",
+                "desc": "Controls classic text wrapping floats (float-start, float-end, float-none)."
+            },
+            {
+                "code": "object-fit",
+                "element": "Media Scaling",
+                "desc": "Dictates how images fill their boxes (object-fit-contain, object-fit-cover)."
+            },
+            {
+                "code": "opacity",
+                "element": "Transparency",
+                "desc": "Sets overall element visibility (opacity-0, opacity-25, opacity-50, opacity-75, opacity-100)."
+            },
+            {
+                "code": "z",
+                "element": "Z-Index Layering",
+                "desc": "Positions elements on the Z-axis (z-0, z-1, z-2, z-3, n1 for negative layer)."
+            },
+            {
+                "code": "stretched-link",
+                "element": "Pseudo-element Click",
+                "desc": "Spreads an <a> tag's clickable area over an entire parent .card."
+            },
+            {
+                "code": "ratio",
+                "element": "Aspect Ratio Box",
+                "desc": "Forces video embed wrappers to hold aspect forms (ratio-16x9, ratio-4x3, ratio-1x1)."
+            },
+            {
+                "code": "vstack / hstack",
+                "element": "Stack Layouts",
+                "desc": "Instant shorthand wrappers for vertical/horizontal layout alignments."
+            }
+        ]
+    },
+    {
+        "id": "typogrophy-advanced",
+        "category": "Advanced Typography",
+        "utilities": [
+            {
+                "code": "text-transform",
+                "element": "Case Transformation",
+                "desc": "Forces casing formats (text-uppercase, text-lowercase, text-capitalize)."
+            },
+            {
+                "code": "text-decor",
+                "element": "Text Decoration",
+                "desc": "Modifies anchor lines (text-decoration-none, text-decoration-underline)."
+            },
+            {
+                "code": "text-break",
+                "element": "Word Breaking",
+                "desc": "Prevents long URLs from breaking layouts (text-break)."
+            },
+            {
+                "code": "text-truncate",
+                "element": "Text Ellipsis",
+                "desc": "Truncates text with trailing dots (text-truncate). Requires d-block/d-inline-block."
+            }
+        ]
+    }
+]

@@ -1,0 +1,16 @@
+@import url('./global.css');
+
+
+  .navbar-brand img {
+    max-height: 70px;
+    width: auto;
+  }
+
+.nav-item .nav-link {
+    text-decoration: none;
+    transition: text-decoration .5s ease-in-out;
+  }
+
+  .nav-item .nav-link:hover {
+    text-decoration: underline;
+  }

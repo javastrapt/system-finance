@@ -1,5 +1,4 @@
 ---
-import "../styles/global.css";
 import siteData from '../data/site.json';
 
 const pathname = Astro.url.pathname;
@@ -19,10 +18,25 @@ const hero = currentPage.hero;
 
 ---
 
-<div class="col-12 bg-dark text-secondary px-4 py-5">
-  <div class="hero container py-5">
+<div class="hero-container bg-dark text-secondary rounded-2 px-3 py-2">
+  <div class="hero container py-0">
     <h1 class="display-5 fw-bold text-white mb-2 hero-title">{hero.title}</h1>
     <p class="hero-subtitle fs-5 mb-5">{hero.subtitle}</p>
     <slot />
   </div>
 </div>
+
+<style>
+
+  .hero-container {
+    width: 100%;
+    height: fit-content;
+  }
+  .hero {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+  }
+</style>
