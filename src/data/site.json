@@ -36,22 +36,12 @@
                 "image": "../metronome.png"
             },
             {
-                "namen": "Bootstrap Reference",
-                "slug": "/reference",
-                "type": "Static",
-                "desc": "A quick Bootstrap Utilities Cheat-Sheet",
-                "hero": {
-                    "title": "Bootstrap Reference Cards",
-                    "subtitle": "...this is more for me than for you"
-                }
-            },
-            {
                 "name": "Contact",
                 "slug": "/contact",
                 "type": "form",
                 "desc": "Get into contact with the site administration and communicate any questions or concerns.",
                 "hero": {
-                    "title": "Cont`act Us",
+                    "title": "Contact Us",
                     "subtitle": "Questions, comments, yes, even concerns...."
                 }
             }

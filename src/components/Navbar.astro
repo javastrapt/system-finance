@@ -28,29 +28,3 @@ const currentPage = pages.find((page) => page.slug === pathname)
     </div>
   </div>
 </nav>
-
-<script>
-
-const pathname = window.location.pathname;
-
-async function loadData() {
-  try {
-    const res = await fetch('http://localhost:3000/api/site')
-    const data = res.json();
-
-    const siteData = data;
-
-    const site = siteData.filter((item) => item.id === 'site');
-    const pages = site.pages;
-    const currentPage = pages.find((page) => page.slug === pathname)
-
-    console.log(`Pathname: ${pathname}\ncurrentPage: ${currentPage}\nPages: ${pages.length}`);
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", async () => {
-  loadData()
-});s
-</script>
