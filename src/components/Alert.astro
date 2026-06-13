@@ -1,0 +1,33 @@
+---
+const {
+  triggerSelector = "#transForm",
+  type = "success",
+  message = "Record added successfully! Check the Transaction Table for confirmation!"
+} = Astro.props;
+
+---
+
+<div id="alert"></div>
+
+<script type="module">
+  const trigger = document.querySelector(${JSON.stringify(triggerSelector)});
+  const alertContainer = document.querySelector("#alert");
+  const alertMessage = ${JSON.stringify(message)};
+  const alertType = ${JSON.stringify(type)};
+
+  const appendAlert = (message, type) => {
+    if (!alertContainer) return;
+
+    alertContainer.innerHTML = `
+      <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    `;
+  };
+
+  trigger?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    appendAlert(alertMessage, alertType);
+  });
+</script>
