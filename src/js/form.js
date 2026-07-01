@@ -76,7 +76,7 @@ transForm.addEventListener('submit', async (e) => {
         });
 
         if (res.ok) {
-            cshowToast();
+            showToast();
             formReset();
         } else {
             const result = await res.json();
@@ -105,7 +105,7 @@ function populateSelects() {
     })
 }
 
-function showToast() {
+function    () {
     const bootstrap = bootstrap.Toast.getOrCreateInstance(toastEl);
     toastBootstrap.show()
 }

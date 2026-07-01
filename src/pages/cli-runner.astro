@@ -1,0 +1,222 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const app = {
+  name: "CLI-Runner",
+  description:
+    "Powered by the popular css Framework 'Bootstrap', the CLI-Runner is a small sketch - a snippet - that with the two engines you need to get your media regardless of the source.  Simply get to your 'Network' tab in your DevTools, find the media you need, 'Copy as URL' and paste in the correct form below .  Sign-up free and free to use <em>for downloading your own media materials from the internet</em>",
+};
+---
+
+<BaseLayout>
+  <main>
+    <!--   begin hero -->
+    <section class="container col-xxl-8 px-4 py-5">
+      <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-10 col-sm-8 col-lg-6 reveal d-4">
+          <img
+            src="https://res.cloudinary.com/systemflo/image/upload/v1782035638/Companies/x_bg-trans_text-white.png"
+            class="d-block mx-lg-auto img-fluid"
+            alt="system-icon"
+            width="700"
+            height="500"
+          />
+        </div>
+        <div class="col-lg-6">
+          <h1 class="display-5 fw-bold lh-1 mb-3 page-title reveal delay-2">
+            {app.name}
+          </h1>
+          <p class="lead page-description reveal delay-4">
+            {app.description}
+          </p>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <button
+              type="button"
+              class="btn btn-lg btn-flo btn-flo px-4 me-md-2"
+              data-bs-toggle="modal"
+              data-bs-target="#ytdlp-modal"
+            >
+              Twitter/X
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-light btn-lg px-4"
+              id="other-btn"
+              data-bs-toggle="modal"
+              data-bs-target="#ffmpeg-modal">Other Sites</button
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--   end hero -->
+
+    <section class="output container d-none" id="ytdlp-out">
+      <div class="cli-output-label">
+        Twitter/X Output (Engine: <code>"yt-dlp"</code>
+      </div>
+      <pre id="ytdlp-output" class="cli-output text-green"></pre>
+    </section>
+
+    <section class="output container d-none" id="ffmpeg-out">
+      <div class="cli-output-label">
+        "Other Sites" Output (Engine: <code>"FFMPEG"</code>)
+      </div>
+      <pre id="ffmpeg-output" class="cli-output text-yellow"></pre>
+
+      <!-- Modal -->
+      <section
+        class="modal fade"
+        id="ytdlp-modal"
+        tabindex="-1"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content rounded-4 shadow text-white">
+            <div class="modal-header border-bottom-0">
+              <h1 class="modal-title display-5 fw-thin">Twitter/X</h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            sa
+            <div class="modal-body">
+              <form id="ytdlpForm" method="POST">
+                <!-- input  -->
+                <div class="row mb-2 align-items-end g-2">
+                  <div class="col">
+                    <label for="ytdlp-url" class="form-label"
+                      >Your media's web address</label
+                    >
+                    <input
+                      type="url"
+                      name="ytdlp-url"
+                      id="ytdlp-url"
+                      class="form-control"
+                      placeholder="https://x.com/someuser/status/123456789"
+                      required
+                    />
+                    <div class="form-text">
+                      The hostname will automatically be normalized to <code
+                        >twitter.com</code
+                      >.
+                    </div>
+                  </div>
+
+                  <div class="col-auto">
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      id="ytdlp-submit"
+                    >
+                      <span
+                        class="spinner-border spinner-border-sm d-none me-1"
+                        role="status"></span>
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </form>
+              <!-- end ffmpeg form -->
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal">Close</button
+              >
+              <button type="button" class="btn btn-flo" id="switch-to-ffmpeg"
+                >Switch to Other Sites</button
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="modal fade"
+        id="ffmpeg-modal"
+        tabindex="-1"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content rounded-4 shadow text-white">
+            <div class="modal-header border-bottom-1 mb-2">
+              <h1 class="modal-title display-5 fw-thin">All Other Sites</h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body py-0">
+              <form id="ffmpegForm" method="POST">
+                <!-- input  -->
+                <div class="row mb-2 g-2">
+                  <div class="col-12">
+                    <label for="url" class="form-label"
+                      >Web Address (.m3u8)</label
+                    >
+                    <input
+                      type="url"
+                      name="url"
+                      id="url"
+                      class="form-control"
+                      pattern=".*\.m3u8(\?.*)?$"
+                      required
+                    />
+                    <div class="invalid-feedback">URL must end in ".m3u8".</div>
+                  </div>
+                  <div class="col-12">
+                    <label for="ffmpeg-output-name" class="form-label"
+                      >Output filename</label
+                    >
+                    <input
+                      type="text"
+                      name="output"
+                      id="ffmpeg-output-name"
+                      class="form-control"
+                      required
+                    />
+                    <div class="form-text">
+                      Saved as <code>downloads/&lt;name&gt;.mp4</code>.
+                    </div>
+                  </div>
+                  <div class="col-12 text-end">
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      id="ffmpeg-submit"
+                    >
+                      <span
+                        class="spinner-border spinner-border-sm d-none me-1"
+                        role="status"></span>
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </form>`
+            </div>
+            <!-- end ytdlp-form -->
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal">Close</button
+            >
+            <button type="button" class="btn btn-flo" id="switch-to-ytdlp"
+              >Switch to "X/Twitter" form</button
+            >
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+  <script src="../js/cli.js"></script>
+</BaseLayout>

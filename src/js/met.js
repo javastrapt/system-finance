@@ -8,15 +8,10 @@ import Timer from './timer.js';
         const btnStartStop = document.querySelector('.start-stop')
         const subtractBeats = document.querySelector('.subtract-beats')
         const addBeats = document.querySelector('.add-beats')
-        const measureCount = decument.querySelector('.measure-count')
+        const measureCount = document.querySelector('.measure-count')
+        
         const click1 = new Audio('../public/audio/click1.mp3');
         const click2 = new Audio('../public/audio/click2.mp3');
-        /Users/michaelflores/Developer/metronomeJS/public/audio/click1.mp3
-
-        src/timer.js
-
-        click1.play();
-        
 
         let bpm = 120;
         let beatsPerMeasure = 4;
@@ -65,20 +60,20 @@ import Timer from './timer.js';
 
 
         btnDecreaseTempo.addEventListener('click', () => {
-            if (bpm <= 20) {}
-            bpm--;
-            vvalidateTempo();
-            updateMet();
+            if (bpm <= 20) { return };
+                bpm--;
+                validateTempo();
+                updateMet();
         });
 
         btnIncreaseTempo.addEventListener('click', () => {
-            if (bpm >= 280) { return } 
+            if (bpm >= 280) { return };
             bpm++;
-            tempoDisplay.textContent = bpm;
-            tempoSlider.value = bpm
-        })
+            validateTempo();
+            updateMet();
+        });
 
-        tempoSlider.addEventListener('change', () => {
+        tempoSlider.addEventListener('input', () => {
             bpm = tempoSlider.value;
             validateTempo();
             updateMet();
@@ -118,19 +113,21 @@ import Timer from './timer.js';
         // FUNCTIONS
 
         function updateMet() {
-            tempoDisp4lay.textContent = bpm;
+            tempoDisplay.textContent = bpm;
             tempoSlider.value = bpm;
             metronome.timeInterval = 60000 / bpm;
             /** PLaceholder - fix with Obj */
-               if (bpm <= 40) { tempoTextString = "Super Slow" };
-        if (bpm > 40 && bpm < 80) { tempoTextString = "Slow" };
-        if (bpm > 80 && bpm < 120) { tempoTextString = "Getting there" };
-        if (bpm > 120 && bpm < 180) { tempoTextString = "Nice and Steady" };
-        if (bpm > 180 && bpm < 220) { tempoTextString = "Rock n' Roll" };
-        if (bpm > 220 && bpm < 240) { tempoTextString = "Funky Stuff" };
-        if (bpm > 240 && bpm < 260) { tempoTextString = "Relax Dude" };
-        if (bpm > 260 && bpm <= 280) { tempoTextString = "Eddie Van Halen" };
-            };
+            if (bpm <= 40) { tempoTextString = "Adagio" };
+            if (bpm > 40 && bpm < 80) { tempoTextString = "Andante" };
+            if (bpm > 80 && bpm < 120) { tempoTextString = "Moderato" };
+            if (bpm > 120 && bpm < 180) { tempoTextString = "Allegro" };
+            if (bpm > 140 && bpm < 180) { tempoTextString = "Vivace" };
+            if (bpm > 180 && bpm < 200) { tempoTextString = "Allegrissimo" };
+            if (bpm > 200 && bpm < 220) { tempoTextString = "Presto" };
+            if (bpm > 220 && bpm <= 280) { tempoTextString = "Freelancers 2010" };
+
+            tempoText.textContent = tempoTextString;
+        };
 
         function validateTempo() {
             if (bpm <= 20) {return }
@@ -143,7 +140,7 @@ import Timer from './timer.js';
                 count = 0;
             }
             if (count === 0) {
-                click.play();
+                click1.play();
                 click1.currentTime = 0;
             } else {
                 click2.play();

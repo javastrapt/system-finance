@@ -10,13 +10,18 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "organize:videos": "node downloads/organizer.js"
   },
   "dependencies": {
     "@astrojs/vercel": "^10.0.8",
     "astro": "^6.4.2",
+    "caddyserver": "^0.1.1",
     "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "escape-html": "^1.0.3",
     "express": "^5.2.1",
+    "express-openid-connect": "^2.20.2",
     "nodemon": "^3.1.14"
   }
 }

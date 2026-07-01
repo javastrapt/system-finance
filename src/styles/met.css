@@ -1,34 +1,24 @@
 @import url('./global.css');
 
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing:  border-box;
-}
-
-:root {
-    --color1: #010101;
-    --color2: #ffffff;
-    --color3: #1d415e;;
-    --color4: #0400ff;
-}
-
-
 body {
     font-family: 'system-ui', sans-serif;
     color: var(--color1);
     user-select: none;
 }
 
-.navbar-brand img {
-    max-height: 100px;
-    width: auto;
+body {
+    background: radial-gradient(
+    circle at 50% 50%, 
+    #1a1f2e 0%, 
+    #0b0d14 100%
+    )
 }
-main .container {
+å
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
 }
 
 main {
@@ -55,7 +45,12 @@ section .hero {
 
 .hero {
     display: block;
+    margin-bottom: clamp(1rem, 3vw, 2rem);
+}
+
+.hero h1 {
     margin-bottom: 4rem;
+    line-height: 1;
 }
 
 .hero .page-title{
@@ -252,4 +247,26 @@ input[type=range]::-moz-range-track {
 
 .d-10 {
     animation-delay: 6.0s;
+}
+
+/** GLOW **/
+.glow-container {
+    position: relative;
+    background-color: #0a0b10;
+    overflow: hidden
+}
+
+.glow-orb {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 450px;
+    height: 450px;
+    background: #243475;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 1;
 }

@@ -1,48 +1,45 @@
 ---
-import "../styles/met.css"
-import Navbar from '../components/Navbar.astro';
+import "../styles/met.css";
+import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
-import siteData from '../data/site.json'
+import siteData from "../data/site.json";
 
 const pathname = Astro.url.pathname;
-const site = siteData.find((item) => item.id === 'site');
+const site = siteData.find((item) => item.id === "site");
 const pages = site.pages;
 
 pages.forEach((page) => {
   const pageName = page.name;
   const slug = page.slug;
-})
+});
 
-const pageColors = {
-  '/': "var(--color1)",
-  '/finance': "var(--bs-dark)",
-  '/met': "transparent"
-}
-
-const textColors = {
-  "/": "#000",
-  "/finance": "#000",
-  "/met": "#fff"
-};
-
-const { title = 'systemflo' } = Astro.props;
+const { title = "systemflo" } = Astro.props;
 ---
 
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
 
-      <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-      <script defer src="../js/activePage.js"></script>
-      <title>{title}</title>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    ></script>
+    <script defer src="src/js/activePage.js"></script>
+    <title>{title}</title>
   </head>
   <body>
     <Navbar />
-    <main class='bg-dark text-light'>
+    <main class="bg-dark text-light">
       <slot />
-  </main>
-  <Footer />
+    </main>
+    <Footer />
   </body>
-  </html>
+</html>

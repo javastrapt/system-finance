@@ -1,4 +1,3 @@
-
 @import url('./global.css');
 
 * {
@@ -14,42 +13,85 @@
     --color4: #0400ff;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-}
+
+
 
 body {
-    font-family: 'Raleway', sans-serif;
-    color: #525252;
+    font-family: 'system-ui', sans-serif;
+    color: var(--color1);
     user-select: none;
 }
-.container {
+
+.navbar-brand img {
+    max-height: 100px;
+    width: auto;
+}
+main .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
 }
-.metronome {
+
+main {
+    width: 100%;
+    height: auto;
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+section .hero {
+    order: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    width: 100%;
+    height: auto;
+    justify-content: space-between;
+    flex-direction: column;
+    flex: 1;
+}
+
+.hero {
+    display: block;
+    margin-bottom: 4rem;
+}
+
+.hero .page-title{
+    letter-spacing: .5rem;
+    font-weight: 200;
+}
+
+section .metronome {
+    display: grid;
+grid-template-columns:  
+
+
+    /* display: flex;
     flex-direction: column;
     width: 300px;
     height: 250px;
-    justify-content: space-between;
+    justify-content: space-between; */
 }
 .bpm-display {
     width: 100%;
     text-align: center;
-    color: #fa545c;
+    color: var(--color4);
     font-weight: bold;
 }
-.bpm-display .tempo {
-    font-size: 4em;
+.tempo-display .tempo {
+    font-size: 4rem;
+    font-weight: 200;
+    letter-spacing: .2rem;
 }
 .tempo-text {
-    font-size: .8em;
+    font-size: 1rem;
     text-transform: uppercase;
     text-align: center;
+    font-weight: 200;
 }
 
 .tempo-settings {
@@ -57,21 +99,20 @@ body {
     justify-content: space-between;
 }
 
-.tempo-settings .adjust-tempo-btn {
-    width: 30px;
-    height: 30px;
-    font-size: 40px;
-    border-radius: 50%;
-    border: 1px solid #ddd;
+.tempo-settings .tempo-adjust {
+    width: 4rem;
+    height: 4rem;
     text-align: center;
     cursor: pointer;
 }
-.tempo-settings .adjust-tempo-btn:hover {
+.tempo-settings .tempo-adjust:hover {
     background: #fa545c;
-    color: #fff;
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    color: var(--color1);
 }
-.tempo-settings .decrease-tempo {
-    line-height: 25px;
+.tempo-settings .decrease .increase {
+    font-size: 5rem
 }
 .tempo-settings .increase-tempo {
     line-height: 32px;
@@ -94,7 +135,7 @@ input[type=range]::-webkit-slider-thumb {
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    background: #fa545c;
+    background: var(--color4);
     cursor: pointer;
     margin-top: -8px;
 }
@@ -103,7 +144,7 @@ input[type=range]::-moz-range-thumb {
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    background: #fa545c;
+    background: var(--color4);
     cursor: pointer;
     border: none;
 }
@@ -121,37 +162,34 @@ input[type=range]::-moz-range-track {
 }
 
 .start-stop {
-    width: 50px;
-    height: 50px;
-    font-size: 0.7em;
+    width: 8rem;
+    height: 8rem;
+    font-size: 1rem;
     text-align: center;
-    background: #fa545c;
+    background: var(--color4);
     border-radius: 50%;
     color: #fff;
-    line-height: 50px;
+    line-height: 125px;
     margin: 0 auto;
     cursor: pointer;
 }
 
 .start-stop:hover {
-    background: #ff656c;
+    background: #fff;
+    color: var(--color3);
 }
 .measures {
     display: flex;
     justify-content: center;
 }
 .measures .stepper {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 1px solid #ddd;
+    width: 2rem;
+    height: 2rem;
     text-align: center;
-    margin: 0 5px;
     cursor: pointer;
 }
 .measures .stepper:hover {
-    background: #ff656c;
-    color: #fff;
+    color: var(--color4);
 }
 .measures .add-beats {
     line-height: 20px;
@@ -161,4 +199,59 @@ input[type=range]::-moz-range-track {
     text-align: center;
     font-size: 0.5em;
     text-transform: uppercase;
+    letter-spacing: .2rem;
+}
+
+.reveal {
+    animation: reveal ease-in-out 2s 1 normal forwards;
+    opacity: 0;
+}
+
+@keyframes reveal {
+    0% {
+        opacity: 0
+    }
+    100% {
+        opacity: 1
+    }
+}
+
+.d-1 {
+    animation-delay: .5s;
+}
+
+.d-2 {
+    animation-delay: 1s
+}
+
+.d-3 {
+    animation-delay: 1.5s
+}
+
+.d-4 {
+    animation-delay: 2.0s
+}
+
+.d-5 {
+    animation-delay: 3.0s
+}
+
+.d-6 {
+    animation-delay: 4.0s
+}
+
+.d-7 {
+    animation-delay: 4.5s;
+}
+
+.d-8 {
+    animation-delay: 5.0s;
+}
+
+.d-9 {
+    animation-delay: 5.5s;
+}
+
+.d-10 {
+    animation-delay: 6.0s;
 }

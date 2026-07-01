@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- STOCK  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+    <!-- BOOTSTRAP  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+    <!--- JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+
+    <!-- CUSTOM  -->
+    <style>
+
+    :root {
+        --color1: #003049ff;
+        --color2: #c1121fff;
+        --color3: #fdf0d5ff;
+        --color4: #780000ff; /* molten-laval */
+        --color5: #669bbcff; /* steel-blue */
+    }
+
+    nav {
+        background-color: var(--color1);
+    }
+
+    .logo img {
+        max-height: 56px;
+        width: auto;
+    }
+
+    nav a {
+        text-decoration: none;
+        transition: text-decoration 0.5s ease-in-out;
+    }
+
+    nav a:hover {
+        text-decoration: underline;
+    }
+
+    </style>
+
+</head>
+
+<body c;lass='bg-dark text-light'>
+    <!-- begin nav -->
+    <nav class="navbar navbar-expand-sm navbar-dark">
+        <div class="container">
+            <a href="#" class='logo'>
+                <img src="https://www.tinyurl.com/systemflo-white" alt="logo" />
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav" id="nav-items"></ul>
+            </div>
+        </div>
+    </nav>
+    <!-- end nav -->
+
+
+    <main>
+       <!-- BEGIN CUSTOM CARDS  -->
+      <div class="container px-4 py-5" id="custom-cards">
+        <h2 class="pb-2 border-bottom">Custom cards</h2>
+        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+          <div class="col">
+            <div
+              class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+              style="background-image: url(&quot;unsplash-photo-1.jpg&quot;)"
+            >
+              <div
+                class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1"
+              >
+                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">
+                  Short title, long jacket
+                </h3>
+                <ul class="d-flex list-unstyled mt-auto">
+                  <li class="me-auto">
+                    <img
+                      src="https://github.com/twbs.png"
+                      alt="Bootstrap"
+                      width="32"
+                      height="32"
+                      class="rounded-circle border border-white"
+                    />
+                  </li>
+                  <li class="d-flex align-items-center me-3">
+                    <svg
+                      class="bi me-2"
+                      width="1em"
+                      height="1em"
+                      role="img"
+                      aria-label="Location"
+                    >
+                      <use xlink:href="#geo-fill"></use>
+                    </svg>
+                    <small>Earth</small>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <svg
+                      class="bi me-2"
+                      width="1em"
+                      height="1em"
+                      role="img"
+                      aria-label="Duration"
+                    >
+                      <use xlink:href="#calendar3"></use>
+                    </svg>
+                    <small>3d</small>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div
+              class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+              style="background-image: url(&quot;unsplash-photo-2.jpg&quot;)"
+            >
+              <div
+                class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1"
+              >
+                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">
+                  Much longer title that wraps to multiple lines
+                </h3>
+                <ul class="d-flex list-unstyled mt-auto">
+                  <li class="me-auto">
+                    <img
+                      src="https://github.com/twbs.png"
+                      alt="Bootstrap"
+                      width="32"
+                      height="32"
+                      class="rounded-circle border border-white"
+                    />
+                  </li>
+                  <li class="d-flex align-items-center me-3">
+                    <svg
+                      class="bi me-2"
+                      width="1em"
+                      height="1em"
+                      role="img"
+                      aria-label="Location"
+                    >
+                      <use xlink:href="#geo-fill"></use>
+                    </svg>
+                    <small>Pakistan</small>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <svg
+                      class="bi me-2"
+                      width="1em"
+                      height="1em"
+                      role="img"
+                      aria-label="Duration"
+                    >
+                      <use xlink:href="#calendar3"></use>
+                    </svg>
+                    <small>4d</small>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div
+              class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+              style="background-image: url(&quot;unsplash-photo-3.jpg&quot;)"
+            >
+              <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
+                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">
+                  Another longer title belongs here
+                </h3>
+                <ul class="d-flex list-unstyled mt-auto">
+                  <li class="me-auto">
+                    <img
+                      src="https://github.com/twbs.png"
+                      alt="Bootstrap"
+                      width="32"
+                      height="32"
+                      class="rounded-circle border border-white"
+                    />
+                  </li>
+                  <li class="d-flex align-items-center me-3">
+                    <svg
+                      class="bi me-2"
+                      width="1em"
+                      height="1em"
+                      role="img"
+                      aria-label="Location"
+                    >
+                      <use xlink:href="#geo-fill"></use>
+                    </svg>
+                    <small>California</small>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <svg
+                      class="bi me-2"
+                      width="1em"
+                      height="1em"
+                      role="img"
+                      aria-label="Duration"
+                    >
+                      <use xlink:href="#calendar3"></use>
+                    </svg>
+                    <small>5d</small>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END CUSTONM CARDS -->
+
+        </main>
+
+
+        <!--   begin footer -->
+        <section class="container">
+            <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+                <div class="col mb-3">
+                    <a href="/" class="d-flex align-text-left justify-content-start flex-column" aria-label="Bootstrap"> <img src='https://www.tinyurl.com/systemflo-black' height="56" aria-hidden="true"></a>
+                    <p class="text-body-secondary text-align-center">© <span id='this-year'></span></p>
+                </div>
+                <div class="col mb-3"></div>
+                <div class="col mb-3">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                    </ul>
+                </div>
+                <div class="col mb-3">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                    </ul>
+                </div>
+                <div class="col mb-3">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column nav-items"></ul>
+                </div>
+            </footer>
+            <!-- end footer -->
+            </section>
+        </main>
+
+        <script>
+            // DATA
+            const pages = [
+                'Home',
+                'Events',
+                'Apps',
+                'About',
+                'Contact'
+            ]
+
+            // DOM
+            const navLinks = document.querySelector('#nav-items')
+
+            // LISTENERS
+            document.addEventListener('DOMContentLoaded', () => {
+                loadPage();
+            })
+
+            formEl.addEventListener('submit', async (e) => {
+                handleSubmit(e)
+            })
+
+            // FUNCTIONS
+
+            function loadPage() {
+                // nav
+                pages.forEach((page) => {
+                    const li = document.createElement('li');
+                    li.classList.add('nav-link');
+                    li.textContent = page;
+                    navLinks.appendChild(li);
+                })
+
+            }
+            async function handleSubmit (e) {
+                e.preventDefault();
+                alert('A Default has been prevented...')
+            }
+        </script>
+    </body>
+</html>

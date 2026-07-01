@@ -3,7 +3,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import siteData from '../data/site.json';
 import FullHero from '../components/HeroFP.astro';
-import LeftHero from "../components/HeroLA.astro";
+;
 import transactions from '../data/transactions.json';
 import "../styles/herofp.css";
 
@@ -11,7 +11,7 @@ import "../styles/herofp.css";
 const pathname = Astro.url.pathname;
 const pages = siteData.find((item) => item.id === 'site')?.pages ?? [];
 const apps = pages.filter((page) => page.type === 'webapp');
-const currentPage = pages.filter((page) => page.slug === pathname);
+const currentPage = pages.find((page) => page.slug === pathname);
 const hero = currentPage.hero;
 const subtitle = currentPage.subtitle;
 
@@ -61,16 +61,6 @@ const latestPostDate = latestRecord
   }
 </section>
 </BaseLayout>
-<script>
-  
-  const astroPathname = "/";
-  const windowPathname = window.location.pathname;
-  if (astroPathname !== windowPathname) {
-    console.info('Warning: Pathnames do not match: ${astroPathname} : ${windowPathname}')
-  } else {
-    console.info(`Pathname match: \nWindowPathname: ${windowPathname} : \nAstroPathname: ${astroPathname}`)
-  }
-</script>
   <style>
 
 /* App Showcase */
@@ -81,7 +71,7 @@ const latestPostDate = latestRecord
   gap: 20px;
   place-items: center;
   justify-content: center;
-  grid-auto-rows: 
+  grid-auto-rows:
   auto
   1fr
   auto

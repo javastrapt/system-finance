@@ -1,137 +1,142 @@
 [
-    {
-        "id": "site",
-        "name": "System Finance",
-        "domain": "systemflo.org",
-        "pages": [
-            {
-                "name": "Home",
-                "slug": "/",
-                "type": "Static",
-                "hero": {
-                    "title": "SystemFLO",
-                    "subtitle": "Your new workflo..."
-                }
-            },
-            {
-                "name": "Finance",
-                "slug": "/finance",
-                "type": "webapp",
-                "desc": "Income vs expense tracking, a transaction table, and a simple calculator with a minimal setup.",
-                "hero": {
-                    "title": "Finance",
-                    "subtitle": "Simply simple, because I simply barely know what I'm doing"
-                },
-                "image": "https://www.tinyurl.com/systemimg-finance" 
-            },
-            {
-                "name": "Metronome",
-                "slug": "/met",
-                "type": "webapp",
-                "desc": "Getting its start as a simple metronome application with basic tempo adjusters and subdivision selectors, this app will eventually feature individual tempo memorybanks, customized accell/rit algorithms (algorhythnms) and the abililty to program all the tempo changes of an entire musical work as desired. Dr. Beat Who?",
-                "hero": {
-                    "title": "Metronome",
-                    "subtitle": "Poco a poco...and always in time"
-                },
-                "image": "../metronome.png"
-            },
-            {
-                "name": "Contact",
-                "slug": "/contact",
-                "type": "form",
-                "desc": "Get into contact with the site administration and communicate any questions or concerns.",
-                "hero": {
-                    "title": "Contact Us",
-                    "subtitle": "Questions, comments, yes, even concerns...."
-                }
-            }
+  {
+    "id": "site",
+    "name": "System Finance",
+    "domain": "systemflo.org",
+    "pages": [
+      {
+        "name": "Home",
+        "slug": "/",
+        "type": "Static",
+        "hero": {
+          "title": "SystemFLO",
+          "subtitle": "Your new workflo..."
+        }
+      },
+      {
+        "name": "Finance",
+        "slug": "/finance",
+        "type": "webapp",
+        "desc": "Income vs expense tracking, a transaction table, and a simple calculator with a minimal setup.",
+        "hero": {
+          "title": "Finance",
+          "subtitle": "Simply simple, because I simply barely know what I'm doing"
+        },
+        "image": "https://www.tinyurl.com/systemimg-finance"
+      },
+      {
+        "name": "Metronome",
+        "slug": "/met",
+        "type": "webapp",
+        "desc": "Getting its start as a simple metronome application with basic tempo adjusters and subdivision selectors, this app will eventually feature individual tempo memorybanks, customized accell/rit algorithms (algorhythnms) and the abililty to program all the tempo changes of an entire musical work as desired. Dr. Beat Who?",
+        "hero": {
+          "title": "Metronome",
+          "subtitle": "Poco a poco...and always in time"
+        },
+        "image": "../metronome.png"
+      },
+      {
+        "name": "CLI-Runner",
+        "slug": "/cli-runner",
+        "type": "webapp",
+        "desc": "A method to run two commands that are normally run via terminal.  Instead of working in the error-prone terminal interface, enjoy two simple HTML forms that not only run the commands, but automate the normalization of the media links upon submission.  Twitter/X media can be retrieved using the yt-dlp form, and all other types of media can be retrieved via the 'ffmpeg' form.",
+        "hero": {
+          "title": "CLI-Runner",
+          "subtitle": "Bringing elegance to the command line by removing the command line..."
+        },
+        "image": "https://res.cloudinary.com/systemflo/image/upload/v1782035638/Companies/x_bg-trans_text-white.png"
+      },
+      {
+        "name": "Contact",
+        "slug": "/contact",
+        "type": "form",
+        "desc": "Get into contact with the site administration and communicate any questions or concerns.",
+        "hero": {
+          "title": "Contact Us",
+          "subtitle": "Questions, comments, yes, even concerns...."
+        }
+      }
+    ]
+  },
+  {
+    "id": "footer",
+    "sections": [
+      {
+        "name": "The Apps",
+        "links": [
+          {
+            "label": "System Finance",
+            "slug": "/finance"
+          },
+          {
+            "label": "System Convert",
+            "slug": "/convertor"
+          },
+          {
+            "label": "System Metronome",
+            "slug": "/met"
+          },
+          {
+            "label": "System CARDashians",
+            "slug": "/cards"
+          },
+          {
+            "label": "System CLI-Runner",
+            "slug": "/scraper"
+          }
         ]
+      },
+      {
+        "name": "Quick Links",
+        "links": [
+          {
+            "label": "Home",
+            "slug": "/"
+          },
+          {
+            "label": "Apps",
+            "slug": "/apps"
+          },
+          {
+            "label": "About",
+            "slug": "/about"
+          },
+          {
+            "label": "Contact",
+            "slug": "/contact"
+          }
+        ]
+      },
+      {
+        "name": "About",
+        "links": [
+          {
+            "label": "Privacy Policy",
+            "slug": "/privacy"
+          },
+          {
+            "label": "Fair Use Policy",
+            "slug": "/fair"
+          },
+          {
+            "label": "Terms of Service",
+            "slug": "/tos"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "org",
+    "name": "System FLO",
+    "address": {
+      "line1": "PO Box 123",
+      "line2": null,
+      "city": "Turlock",
+      "state": "CA",
+      "zip": "95382"
     },
-    {
-        "id": "app",
-        "name": "System Finance",
-        "desc": "Simple Income/Expense tabulation app that keeps all records and does simple financial statistics as a summary",
-        "keywords": ["finance", "mathematical", "calculator", "tabulation", "record-keeping", "json-data", "database-free"]
-    },
-    {
-        "id": "footer",
-        "sections": [
-            {
-                "name": "The Apps",
-                "links": [
-                    {
-                        "label": "The Financer",
-                        "slug": "/finance"
-                    },
-                    {
-                        "label": "The Convertor",
-                        "slug": "/convertor"
-                    },
-                    {
-                        "label": "The Metronome",
-                        "slug": "/met" 
-                    },
-                    {
-                        "label": "The Cardiashians",
-                        "slug": "/cards"
-                    },
-                    {
-                        "label": "The Scraper",
-                        "slug": "/scraper"
-                    }
-                ]
-            },
-            {
-                "name": "Quick Links",
-                "links": [
-                    {
-                        "label": "Home",
-                        "slug": "/"
-                    },
-                    {
-                        "label": "Apps",
-                        "slug": "/apps"
-                    },
-                    {
-                        "label": "About",
-                        "slug": "/about"
-                    },
-                    {
-                        "label": "Contact",
-                        "slug": "/contact"
-                    }
-                    ]
-                },
-                {
-                    "name": "About",
-                    "links": [
-                        {
-                            "label": "Privacy Policy",
-                            "slug": "/privacy"
-                        },
-                        {
-                            "label": "Fair Use Policy",
-                            "slug": "/fair"
-                        },
-                        {
-                            "label": "Terms of Service",
-                            "slug": "/tos"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-        "id": "org",
-        "name": "System FLO",
-        "address": {
-            "line1": "PO Box 123",
-            "line2": null,
-            "city": "Turlock",
-            "state": "CA",
-            "zip": "95382"
-        },
-        "ceo": "Michael Flores",
-        "logo": "https://www.tinyurl.com/systemflo-white"
-    }
+    "ceo": "Michael Flores",
+    "logo": "https://www.tinyurl.com/systemflo-white"
+  }
 ]

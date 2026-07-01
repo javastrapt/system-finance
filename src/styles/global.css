@@ -1,27 +1,28 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 :root {
-    --color1: #092e20; /* Forest */
-    --color2: #045149; /* Dedep */
-    --color3: #E2DFD5; /* Beige */
-    --bluecolor1: #033487;
-    --bluecolor2:#008afe;
-    --bluecolor3: white;
+  --color1: #092e20; /* Forest */
+  --color2: #045149; /* Dedep */
+  --color3: #e2dfd5; /* Beige */
+  --bluecolor1: #033487;
+  --bluecolor2: #008afe;
+  --bluecolor3: white;
+  --colorflo1: #17d9ef;
+  --colorflo2: #09f7a8;
 }
-
 body {
   font-family: system-ui, sans-serif;
-}
-
-.navbar {
-  background-color: var(--nav-color);
 }
 
 h1 {
   font-weight: 700;
 }
 
+/* Customized Bootstrap */
+.shadow-white {
+  box-shadow: 0 0.5rem 1rem rgba(255, 255, 255, 0.6) important!;
+}

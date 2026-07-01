@@ -1,34 +1,37 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 // import '../styles/bordercards.css';
-import '../styles/glowcards.css';
+import "../styles/glowcards.css";
 // import '../styles/glasscards.css';
 import Hero from "../components/Hero.astro";
 import transactions from "../data/transactions.json";
+import Alert from "../components/Alert.astro";
 
+/** *************** TRANSACTIONS ****************/
 const sortedTransactions = [...transactions].sort(
   (a, b) => Number(new Date(b.postDate)) - Number(new Date(a.postDate)),
 );
 
-const payments = transactions
-  .filter((transaction) => transaction.type === "Payment")
-  .reduce((sum, item) => sum + Number(item.amount), 0);
-
-const charges = transactions
-  .filter((transaction) => transaction.type === "Charge")
-  .reduce((sum, item) => sum + Number(item.amount), 0);
-
-const balanceRaw = charges - payments;
-
+// Helper Functions
 const formatter = Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
 });
 
-const totalPayments = formatter.format(payments);
-const totalCharges = formatter.format(charges);
-const balance = formatter.format(balanceRaw);
+// Math
+const chargesRaw = transactions
+  .filter((item) => item.type?.toLowerCase() === "charge")
+  .reduce((sum, item) => sum + Number(item.amount || 0), 0);
 
+const paymentsRaw = transactions
+  .filter((item) => item.type?.toLowerCase() === "payment")
+  .reduce((sum, item) => sum + Number(item.amount || 0), 0);
+
+const balanceRaw = Number((chargesRaw - paymentsRaw).toFixed(2));
+
+const totalCharges = formatter.format(chargesRaw);
+const totalPayments = formatter.format(paymentsRaw);
+const balance = formatter.format(balanceRaw);
 const today = Intl.DateTimeFormat("en-US", {
   year: "numeric",
   month: "2-digit",
@@ -37,268 +40,353 @@ const today = Intl.DateTimeFormat("en-US", {
 ---
 
 <BaseLayout title="Finance">
+  <Alert
+    triggerSelector="#transForm"
+    type="success"
+    message="Record added successfully - check the transaction datatable for confirmation!"
+  />
   <Hero>
     <div class="d-flex align-items-center">
       <button
-      
         class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold"
         data-bs-toggle="modal"
         data-bs-target="#addRecord"
-        id="btn-add-record">Add Record</button
+        id="btn-add-record"
       >
+        Add Record
+      </button>
       <button
         type="button"
         class="btn btn-outline-light btn-lg px-4"
         data-bs-toggle="modal"
         data-bs-target="#viewSummary"
-        id="btn-view-summary">View Summary</button
+        id="btn-view-summary"
       >
+        View Summary
+      </button>
     </div>
   </Hero>
 
   <section class="totals-container my-4">
-    <div class="row">
-      <div
-        class="col-12 mb-3 d-flex flex-wrap justify-content-between align-items-center flex-row"
+    <div class="row g-3">
+      <div class="col-12 col-md-4">
+        <div class="card shadow-sm summary-card" id="charges">
+          <div class="card-body">
+            <h2 class="card-title fw-light amount">{totalCharges}</h2>
+            <h4 class="label card-subtitle text-secondary fw-bold">
+              Total Charges
+            </h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <div class="card summary-card shadow" id="payments">
+          <div class="card-body">
+            <h2 class="card-title fw-light amount">{totalPayments}</h2>
+            <h4 class="label card-subtitle text-secondary fw-bold">
+              Total Payments
+            </h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <div class="card summary-card shadow-sm" id="balance">
+          <div class="card-body">
+            <h2 class="card-title fw-light amount">{balance}</h2>
+            <h4 class="label card-subtitle text-secondary fw-bold">
+              Remaining Balance
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <h1 class="col-12 px-2 py-3 display-4 fw-light">Transaction History</h1>
+      <!-- start table -->
+      <table
+        class="table table-responsive table-striped table-dark table-hover"
       >
-        <div class="col mx-2">
-          <div class="card shadow-sm summary-card" id='charges'>
-            <div class="card-body">
-              <h2 class="card-title fw-light amount">{totalCharges}</h2>
-              <h4 class="label card-subtitle text-secondary fw-bold">
-                Total Charges
-              </h4>
-            </div>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Post Date</th>
+            <th>Amount</th>
+            <th>Service</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            sortedTransactions.map((transaction) => (
+              <tr>
+                <td>{transaction.transId}</td>
+                <td>{transaction.type}</td>
+                <td>{transaction.desc}</td>
+                <td>{transaction.postDate}</td>
+                <td>{formatter.format(Number(transaction.amount))}</td>
+                <td>{transaction.service}</td>
+              </tr>
+            ))
+          };
+        </tbody>
+      </table>
+      <!-- end table -->
+    </div>
+
+    <!-- modals  -->
+    <div class="modal fade" id="addRecord" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content rounded-4 shadow">
+          <div class="modal-header border-bottom-0">
+            <h1 class="modal-title display-5 fw-thin">Add Record</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"></button>
+          </div>
+
+          <!-- form -->
+          <div class="modal-body py-0">
+            <form id="transForm" action="/submit" method="POST">
+              <div class="row mb-2">
+                <div class="col floating-form">
+                  <label for="type" class="form-label">Transaction Type</label>
+                  <select id="type" name="type" class="form-control" required>
+                    <option disabled selected>Type Select...</option>
+                  </select>
+                </div>
+
+                <div class="col form-floating">
+                  <input
+                    type="text"
+                    id="desc"
+                    name="desc"
+                    class="form-control"
+                    placeholder="Description"
+                    required
+                  />
+                  <label for="desc" class="form-label">Description</label>
+                </div>
+              </div>
+
+              <div class="row mb-2">
+                <div class="col">
+                  <label for="postDate" class="form-label">Post Date</label>
+                  <input
+                    type="date"
+                    id="postDate"
+                    name="postDate"
+                    class="form-control"
+                    value={today}
+                  />
+                </div>
+                <div class="col form-floating">
+                  <input
+                    type="number"
+                    id="amount"
+                    name="amount"
+                    class="form-control"
+                    step="1"
+                    required=""
+                  />
+                  <label for="amount" class="form-label">Amount</label>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col">
+                  <label for="service" class="form-label">Service Used</label>
+                  <select
+                    id="service"
+                    name="service"
+                    class="form-select"
+                    required
+                  >
+                    <option disabled selected>Service Select...</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div
+                  class="modal-header flex-column align-items-stretch w-100 gap-2 ob-3 border-top-0"
+                >
+                </div>
+              </div>
+            </form>
+          </div>
+          <div
+            class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0"
+          >
+            <button
+              type="submit"
+              form="transForm"
+              class="btn btn-lg btn-primary">Submit</button
+            >
+            <button
+              type="button"
+              class="btn btn-lg btn-secondary"
+              data-bs-dismiss="modal">Close</button
+            >
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="col mx-2">
-          <div class="card summary-card shadow-sm" id='payments'>
-            <div class="card-body">
-              <h2 class="card-title fw-light amount">{totalPayments}</h2>
-              <h4 class="label card-subtitle text-secondary fw-bold">
-                Total Payments
-              </h4>
-            </div>
+    <!-- modal 2 -->
+    <div class="modal fade" id="viewSummary" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content rounded-4 shadow">
+          <div class="modal-header border-bottom-0">
+            <h1 class="modal-title fs-5">View Summary</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"></button>
           </div>
-        </div>
 
-        <div class="col mx-2">
-          <div class="card summary-card shadow-sm" id='balance'>
-            <div class="card-body">
-              <h2 class="card-title fw-light amount">{balance}</h2>
-              <h4 class="label card-subtitle text-secondary fw-bold">
-                Remaining Balance
-              </h4>
-            </div>
+          <div class="modal-body py-0"></div>
+          <div
+            class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0"
+          >
+            <button type="button" class="btn btn-lg btn-primary"
+              >"Sure, Jan"</button
+            >
+            <button
+              type="button"
+              class="btn btn-lg btn-secondary"
+              data-bs-dismiss="modal">Close</button
+            >
           </div>
         </div>
       </div>
     </div>
   </section>
-  <div class="container">
-    <h1 class='col-12 px-2 py-3 display-4 fw-light'>Transaction History</h1>
-    <table class="table table-responsive table-striped table-hover">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Type</th>
-          <th>Description</th>
-          <th>Post Date</th>
-          <th>Amount</th>
-          <th>Service</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          sortedTransactions.map((transaction) => (
-            <tr>
-              <td>{transaction.transId}</td>
-              <td>{transaction.type}</td>
-              <td>{transaction.desc}</td>
-              <td>{transaction.postDate}</td>
-              <td>{Number(transaction.amount).toFixed(2)}</td>
-              <td>{transaction.service}</td>
-            </tr>
-          ))
-        };
-      </tbody>
-    </table>
-  </div>
 
-  <div class="modal fade" id="addRecord" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content rounded-4 shadow">
-        <div class="modal-header border-bottom-0">
-          <h1 class="modal-title display-5 fw-thin">Add Record</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
+  <script>
+    /** ***************** DATA ***************** */
+    const selects = [
+      {
+        id: "types",
+        options: ["Charge", "Payment"],
+      },
+      {
+        id: "services",
+        options: ["Zelle", "Paypal", "Cash", "Other..."],
+      },
+    ];
 
-        <div class="modal-body py-0">
-          <form id="transForm" action="/submit" method="POST">
-            <div class="row mb-2">
-              <div class="col floating-form">
-                <label for="type" class="form-label">Transaction Type</label>
-                <select id="type" name="type" class="form-control" required>
-                  <option disabled selected>Type Select...</option>
-                </select>
-              </div>
+    const types = ["Charge", "Payment"];
 
-              <div class="col form-floating">
-                <input type="text" id="desc" name="desc" class="form-control" placeholder="Description" required />
-                <label for="desc" class="form-label">Description</label>
-              </div>
-            </div>
+    const prefillPayment = {
+      type: "Payment",
+      desc: "Payment Received",
+      posted: null,
+      amount: null,
+      service: "Zelle",
+    };
 
-            <div class="row mb-2">
-              <div class="col">
-                <label for="postDate" class="form-label">Post Date</label>
-                <input type="date" id="postDate" name="postDate" class="form-control" value={today} />
-              </div>
-              <div class="col form-floating">
-                <input type="number" id="amount" name="amount" class="form-control" step="1" required />
-                <label for="amount" class="form-label">Amount</label>
-              </div>
-            </div>
-            <div class="row mb-2">
-              <div class="col">
-                <label for="service" class="form-label">Service Used</label>
-                <select id="service" name="service" class="form-select" required>
-                  <option disabled selected>Service Select...</option>
-                </select>
-              </div>
-            </div>
-            <div class="row mb-2">
-              <div class="modal-header flex-column align-items-stretch w-100 gap-2 ob-3 border-top-0"></div>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
-          <button type="submit" form="transForm" class="btn btn-lg btn-primary">Submit</button>
-          <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
+    const services = [
+      "Zelle",
+      "Paypal",
+      "Venmo",
+      "Chime",
+      "CashApp",
+      "Check",
+      "Money Order",
+      "Cash",
+    ];
 
-  <div class="modal fade" id="viewSummary" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content rounded-4 shadow">
-        <div class="modal-header border-bottom-0">
-          <h1 class="modal-title fs-5">View Summary</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
+    /** ***************** DOM ***************** */
 
-        <div class="modal-body py-0"></div>
-        <div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
-          <button type="button" class="btn btn-lg btn-primary">"Sure, Jan"</button>
-          <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</BaseLayout>
+    const addForm = document.getElementById("transForm");
+    const typeSelect = document.getElementById("type");
+    const descEl = document.getElementById("desc");
+    const postDateEl = document.getElementById("postDate");
+    const serviceSelect = document.getElementById("service");
+    const toastEl = document.querySelector("#toast");
 
-<script>
-  const types = ["Charge", "Payment"];
-
-  const prefillPayment = {
-    type: "Payment",
-    desc: "Payment Received",
-    posted: null,
-    amount: null,
-    service: "Zelle",
-  };
-
-  const services = [
-    "Zelle",
-    "Paypal",
-    "Venmo",
-    "Chime",
-    "CashApp",
-    "Check",
-    "Money Order",
-    "Cash",
-  ];
-
-  const addForm = document.getElementById("transForm");
-  const typeSelect = document.getElementById("type");
-  const descEl = document.getElementById("desc");
-  const postDateEl = document.getElementById("postDate");
-  const serviceSelect = document.getElementById("service");
-
-  document.addEventListener("DOMContentLoaded", () => {
-    popSelects();
-  });
-
-  typeSelect?.addEventListener("change", () => {
-    if (typeSelect.value === "charge") {
-      const date = new Date();
-      const month = date.toLocaleString("default", { month: "long" });
-      const year = new Date().getFullYear();
-
-      descEl.value = `${month} ${year} rent`;
-    } else {
-      descEl.value = "Thank you for your payment";
-    }
-  });
-
-  addForm?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(addForm);
-    const data = Object.fromEntries(formData.entries());
-
-    try {
-      await fetch("http://localhost:3000/api/transactions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  });
-
-  function popSelects() {
-    if (!typeSelect || !serviceSelect) return;
-
-    types.forEach((type) => {
-      const option = document.createElement("option");
-      option.value = type.toLowerCase();
-      option.textContent = type;
-
-      typeSelect.appendChild(option);
+    document.addEventListener("DOMContentLoaded", () => {
+      popSelects();
     });
 
-    services.forEach((service) => {
-      const option = document.createElement("option");
-      option.value = service.toLowerCase();
-      option.textContent = service;
+    typeSelect?.addEventListener("change", () => {
+      if (typeSelect.value === "charge") {
+        const date = new Date();
+        const month = date.toLocaleString("default", { month: "long" });
+        const year = new Date().getFullYear();
 
-      serviceSelect.appendChild(option);
-    });
-  }
-
-  function loadPaytmentPrefill() {
-    Object.entries(prefillPayment).forEach(([name, value]) => {
-      const field = document.querySelector(`[name="${name}"]`);
-      if (field) {
-        field.value = value;
+        descEl.value = `${month} ${year} rent`;
+      } else {
+        descEl.value = "Thank you for your payment";
       }
     });
-    postDateEl?.focus();
-  }
-</script>
-<style>
-  .modal {
-    backdrop-filter: blur(10px);
-  }
 
-  .hero {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-  }
-</style>
+    addForm?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(addForm);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        await fetch("http://localhost:3000/api/transactions", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    });
+
+    function popSelects() {
+      if (!typeSelect || !serviceSelect) return;
+
+      types.forEach((type) => {
+        const option = document.createElement("option");
+        option.value = type.toLowerCase();
+        option.textContent = type;
+
+        typeSelect.appendChild(option);
+      });
+
+      services.forEach((service) => {
+        const option = document.createElement("option");
+        option.value = service.toLowerCase();
+        option.textContent = service;
+
+        serviceSelect.appendChild(option);
+      });
+    }
+
+    function loadPaytmentPrefill() {
+      Object.entries(prefillPayment).forEach(([name, value]) => {
+        const field = document.querySelector(`[name="${name}"]`);
+        if (field) {
+          field.value = value;
+        }
+      });
+      postDateEl?.focus();
+    }
+
+    function showToast() {
+      const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastEl);
+      toastBootstrap.show();
+    }
+  </script>
+  <style>
+    .modal {
+      backdrop-filter: blur(10px);
+    }
+
+    .hero {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+    }
+  </style>
+</BaseLayout>

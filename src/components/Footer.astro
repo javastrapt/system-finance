@@ -2,8 +2,11 @@
 import siteData from "../data/site.json";
 import "../styles/footer.css";
 
-const footer = siteData.find((item) => item.id === 'footer');
+const footer = siteData.find((item) => item.id === "footer");
 const sections = footer.sections;
+
+const site = siteData.find((item) => item.id === "site");
+const pages = site.pages;
 
 const org = siteData.find((item) => item.id === "org");
 const orgLogo = org.logo;
@@ -12,23 +15,55 @@ const orgName = org.name;
 const year = new Date().getFullYear();
 ---
 
-<footer class='bg-dark text-light py-5'>
-  <div class='container'>
-    <div class='row'>
-      <div class='col-12 col-md-3 mb-4'>
-        <img src={orgLogo} height="70" width="auto" alt={`${orgName} logo`}>
+<footer
+  class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
+>
+  <p class="col-md-4 mb-0 text-body-white">
+    <span class="text-white">© {year} {orgName}</span>
+  </p>
+  <a
+    href="/"
+    class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
+    aria-label="Bootstrap"
+  >
+    <img
+      src="https://www.tinyurl.com/systemflo-icon"
+      alt="system-flo-icon"
+      srcset=""
+    />
+  </a>
+  <ul class="nav col-md-4 justify-content-end">
+    {
+      pages.map((page) => (
+        <li class="nav-item">
+          <a href={page.slug} class="nav-link px-2 text-body-white">
+            {page.name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</footer>
+
+<!--
+<footer class="bg-dark text-light py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-3 mb-4">
+        <img src={orgLogo} height="70" width="auto" alt={`${orgName} logo`} />
         <p>{orgName} © {year}</p>
       </div>
       {
-        sections.map(section => (
-          <div class='col-12 col-md-3 mb-4'>
-            <h5 class='fw-bold'>{section.name}</h5>
+        sections.map((section) => (
+          <div class="col-12 col-md-3 mb-4">
+            <h5 class="fw-bold">{section.name}</h5>
 
-            <ul class='nav flex-column'>
+            <ul class="nav flex-column">
               {section.links.map((link) => (
-                <li class='nav-item'>
-                  <a class='nav-link text-light fw-thin ps-0'
-                  href={link.slug ?? '#'}
+                <li class="nav-item">
+                  <a
+                    class="nav-link text-light fw-thin ps-0"
+                    href={link.slug ?? "#"}
                   >
                     {link.label}
                   </a>
@@ -40,4 +75,4 @@ const year = new Date().getFullYear();
       }
     </div>
   </div>
-</footer>
+</footer> -->
