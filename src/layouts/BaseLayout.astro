@@ -2,17 +2,6 @@
 import "../styles/met.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
-import siteData from "../data/site.json";
-
-const pathname = Astro.url.pathname;
-const site = siteData.find((item) => item.id === "site");
-const pages = site.pages;
-
-pages.forEach((page) => {
-  const pageName = page.name;
-  const slug = page.slug;
-});
-
 const { title = "systemflo" } = Astro.props;
 ---
 
@@ -32,7 +21,6 @@ const { title = "systemflo" } = Astro.props;
       defer
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     ></script>
-    <script defer src="src/js/activePage.js"></script>
     <title>{title}</title>
   </head>
   <body>
@@ -41,5 +29,8 @@ const { title = "systemflo" } = Astro.props;
       <slot />
     </main>
     <Footer />
+    <script>
+      import "../js/activePage.js";
+    </script>
   </body>
 </html>

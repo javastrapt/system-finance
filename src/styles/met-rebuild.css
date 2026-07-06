@@ -1,0 +1,47 @@
+@import url("./global.css");
+
+body {
+  font-family: "system-ui", sans-serif;
+  color: var(--color1);
+  user-select: none;
+  background: gradial-gradient(circle at 50% 50%, #1a1f2e 0%, #0b0d14 100%);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  justify-content: center;
+}
+
+.metronome {
+  border: 1px solid #000;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 250px;
+  justify-content: center;
+}
+
+.bpm-display {
+  width: 100%;
+  text-align: center;
+  color: var(--color4);
+  font-weight: bold;
+}
+
+.bpm-display .tempo {
+  font-size: 4em;
+}
+
+.tempo-text {
+  font-size: 0.8em;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 200;
+}
+
+.tempo-settings {
+  display: flex;
+  justify-content: center;
+}

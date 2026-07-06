@@ -1,16 +1,22 @@
-@import url('./global.css');
+@import url("./global.css");
 
+.navbar {
+  --navbar-logo-height: 70px;
+}
+.navbar-brand img {
+  max-height: var(--navbar-logo-height);
+  width: auto;
+}
 
-  .navbar-brand img {
-    max-height: 70px;
-    width: auto;
-  }
+nav {
+  max-height: calc(var(--navbar-logo-height) + 1rem);
+}
 
 .nav-item .nav-link {
-    text-decoration: none;
-    transition: text-decoration .5s ease-in-out;
-  }
+  text-decoration: none;
+  transition: text-decoration 0.5s ease-in-out;
+}
 
-  .nav-item .nav-link:hover {
-    text-decoration: underline;
-  }
+.nav-item .nav-link:hover {
+  text-decoration: underline;
+}

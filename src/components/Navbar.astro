@@ -1,29 +1,34 @@
 ---
-import '../styles/navbar.css';
-import siteData from '../data/site.json';
+import "../styles/navbar.css";
+import siteData from "../data/site.json";
 
 const pathname = Astro.url.pathname;
-const site = siteData.find((item) => item.id === 'site');
+const site = siteData.find((item) => item.id === "site");
 const pages = site.pages;
-const currentPage = pages.find((page) => page.slug === pathname)
-
+const currentPage = pages.find((page) => page.slug === pathname);
 ---
 
 <nav class="navbar navbar-expand-lg bg-dark text-light navbar-dark">
-  <div class='container'>
+  <div class="container">
     <a class="navbar-brand" href="/">
-      <img src='https://www.tinyurl.com/systemflo-white' alt='systemflo-logo' class='fade-in delay-6'>
+      <img
+        src="https://www.tinyurl.com/systemflo-white"
+        alt="systemflo-logo"
+        class="fade-in delay-6"
+      />
     </a>
 
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav ms-auto">
-        {pages.map(page => (
-          <li class="nav-item">
-            <a class="nav-link" href={page.slug}>
-              {page.name}
-            </a>
-          </li>
-        ))}
+        {
+          pages.map((page) => (
+            <li class="nav-item">
+              <a class="nav-link" href={page.slug}>
+                {page.name}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </div>
   </div>

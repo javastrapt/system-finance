@@ -10,8 +10,8 @@ import Timer from './timer.js';
         const addBeats = document.querySelector('.add-beats')
         const measureCount = document.querySelector('.measure-count')
         
-        const click1 = new Audio('../public/audio/click1.mp3');
-        const click2 = new Audio('../public/audio/click2.mp3');
+        const click1 = new Audio('/audio/click1.mp3');
+        const click2 = new Audio('/audio/click2.mp3');
 
         let bpm = 120;
         let beatsPerMeasure = 4;

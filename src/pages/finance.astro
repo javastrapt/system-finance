@@ -1,24 +1,19 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-// import '../styles/bordercards.css';
 import "../styles/glowcards.css";
-// import '../styles/glasscards.css';
 import Hero from "../components/Hero.astro";
 import transactions from "../data/transactions.json";
 import Alert from "../components/Alert.astro";
 
-/** *************** TRANSACTIONS ****************/
 const sortedTransactions = [...transactions].sort(
   (a, b) => Number(new Date(b.postDate)) - Number(new Date(a.postDate)),
 );
 
-// Helper Functions
 const formatter = Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
 });
 
-// Math
 const chargesRaw = transactions
   .filter((item) => item.type?.toLowerCase() === "charge")
   .reduce((sum, item) => sum + Number(item.amount || 0), 0);
@@ -32,11 +27,7 @@ const balanceRaw = Number((chargesRaw - paymentsRaw).toFixed(2));
 const totalCharges = formatter.format(chargesRaw);
 const totalPayments = formatter.format(paymentsRaw);
 const balance = formatter.format(balanceRaw);
-const today = Intl.DateTimeFormat("en-US", {
-  year: "numeric",
-  month: "2-digit",
-  day: "2-digit",
-}).format(new Date());
+const today = new Date().toISOString().slice(0, 10);
 ---
 
 <BaseLayout title="Finance">
@@ -72,7 +63,7 @@ const today = Intl.DateTimeFormat("en-US", {
       <div class="col-12 col-md-4">
         <div class="card shadow-sm summary-card" id="charges">
           <div class="card-body">
-            <h2 class="card-title fw-light amount">$8,759.68</h2>
+            <h2 class="card-title fw-light amount">{totalCharges}</h2>
             <h4 class="label card-subtitle text-secondary fw-bold">
               Total Charges
             </h4>
@@ -83,7 +74,7 @@ const today = Intl.DateTimeFormat("en-US", {
       <div class="col-12 col-md-4">
         <div class="card summary-card shadow" id="payments">
           <div class="card-body">
-            <h2 class="card-title fw-light amount">$6,484.45</h2>
+            <h2 class="card-title fw-light amount">{totalPayments}</h2>
             <h4 class="label card-subtitle text-secondary fw-bold">
               Total Payments
             </h4>
@@ -94,15 +85,15 @@ const today = Intl.DateTimeFormat("en-US", {
       <div class="col-12 col-md-4">
         <div class="card summary-card shadow-sm" id="balance">
           <div class="card-body">
-            <h2 class="card-title fw-light amount">$2,275.23</h2>
+            <h2 class="card-title fw-light amount">{balance}</h2>
             <h4 class="label card-subtitle text-secondary fw-bold">Balance</h4>
           </div>
         </div>
       </div>
     </div>
+
     <div class="container">
       <h1 class="col-12 px-2 py-3 display-4 fw-light">Transaction History</h1>
-      <!-- start table -->
       <table
         class="table table-responsive table-striped table-dark table-hover"
       >
@@ -128,13 +119,11 @@ const today = Intl.DateTimeFormat("en-US", {
                 <td>{transaction.service}</td>
               </tr>
             ))
-          };
+          }
         </tbody>
       </table>
-      <!-- end table -->
     </div>
 
-    <!-- modals  -->
     <div class="modal fade" id="addRecord" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content rounded-4 shadow">
@@ -144,10 +133,10 @@ const today = Intl.DateTimeFormat("en-US", {
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
-              aria-label="Close"></button>
+              aria-label="Close"
+            ></button>
           </div>
 
-          <!-- form -->
           <div class="modal-body py-0">
             <form id="transForm" action="/submit" method="POST">
               <div class="row mb-2">
@@ -188,12 +177,13 @@ const today = Intl.DateTimeFormat("en-US", {
                     id="amount"
                     name="amount"
                     class="form-control"
-                    step="1"
-                    required=""
+                    step="0.01"
+                    required
                   />
                   <label for="amount" class="form-label">Amount</label>
                 </div>
               </div>
+
               <div class="row mb-2">
                 <div class="col">
                   <label for="service" class="form-label">Service Used</label>
@@ -207,33 +197,31 @@ const today = Intl.DateTimeFormat("en-US", {
                   </select>
                 </div>
               </div>
-              <div class="row mb-2">
-                <div
-                  class="modal-header flex-column align-items-stretch w-100 gap-2 ob-3 border-top-0"
-                >
-                </div>
-              </div>
             </form>
           </div>
+
           <div
             class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0"
           >
             <button
               type="submit"
               form="transForm"
-              class="btn btn-lg btn-primary">Submit</button
+              class="btn btn-lg btn-primary"
             >
+              Submit
+            </button>
             <button
               type="button"
               class="btn btn-lg btn-secondary"
-              data-bs-dismiss="modal">Close</button
+              data-bs-dismiss="modal"
             >
+              Close
+            </button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- modal 2 -->
     <div class="modal fade" id="viewSummary" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content rounded-4 shadow">
@@ -243,21 +231,26 @@ const today = Intl.DateTimeFormat("en-US", {
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
-              aria-label="Close"></button>
+              aria-label="Close"
+            ></button>
           </div>
 
-          <div class="modal-body py-0"></div>
+          <div class="modal-body py-0">
+            <p class="mb-3">Charges: {totalCharges}</p>
+            <p class="mb-3">Payments: {totalPayments}</p>
+            <p class="mb-0">Balance: {balance}</p>
+          </div>
+
           <div
             class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0"
           >
-            <button type="button" class="btn btn-lg btn-primary"
-              >"Sure, Jan"</button
-            >
             <button
               type="button"
               class="btn btn-lg btn-secondary"
-              data-bs-dismiss="modal">Close</button
+              data-bs-dismiss="modal"
             >
+              Close
+            </button>
           </div>
         </div>
       </div>
@@ -265,28 +258,7 @@ const today = Intl.DateTimeFormat("en-US", {
   </section>
 
   <script>
-    /** ***************** DATA ***************** */
-    const selects = [
-      {
-        id: "types",
-        options: ["Charge", "Payment"],
-      },
-      {
-        id: "services",
-        options: ["Zelle", "Paypal", "Cash", "Other..."],
-      },
-    ];
-
     const types = ["Charge", "Payment"];
-
-    const prefillPayment = {
-      type: "Payment",
-      desc: "Payment Received",
-      posted: null,
-      amount: null,
-      service: "Zelle",
-    };
-
     const services = [
       "Zelle",
       "Paypal",
@@ -298,33 +270,45 @@ const today = Intl.DateTimeFormat("en-US", {
       "Cash",
     ];
 
-    /** ***************** DOM ***************** */
-
     const addForm = document.getElementById("transForm");
     const typeSelect = document.getElementById("type");
     const descEl = document.getElementById("desc");
-    const postDateEl = document.getElementById("postDate");
     const serviceSelect = document.getElementById("service");
-    const toastEl = document.querySelector("#toast");
 
     document.addEventListener("DOMContentLoaded", () => {
-      popSelects();
+      if (!typeSelect || !serviceSelect) return;
+
+      types.forEach((type) => {
+        const option = document.createElement("option");
+        option.value = type.toLowerCase();
+        option.textContent = type;
+        typeSelect.appendChild(option);
+      });
+
+      services.forEach((service) => {
+        const option = document.createElement("option");
+        option.value = service.toLowerCase();
+        option.textContent = service;
+        serviceSelect.appendChild(option);
+      });
     });
 
     typeSelect?.addEventListener("change", () => {
+      if (!descEl) return;
+
       if (typeSelect.value === "charge") {
         const date = new Date();
         const month = date.toLocaleString("default", { month: "long" });
-        const year = new Date().getFullYear();
-
+        const year = date.getFullYear();
         descEl.value = `${month} ${year} rent`;
-      } else {
-        descEl.value = "Thank you for your payment";
+        return;
       }
+
+      descEl.value = "Thank you for your payment";
     });
 
-    addForm?.addEventListener("submit", async (e) => {
-      e.preventDefault();
+    addForm?.addEventListener("submit", async (event) => {
+      event.preventDefault();
 
       const formData = new FormData(addForm);
       const data = Object.fromEntries(formData.entries());
@@ -335,46 +319,12 @@ const today = Intl.DateTimeFormat("en-US", {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
         });
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        console.error(error);
       }
     });
-
-    function popSelects() {
-      if (!typeSelect || !serviceSelect) return;
-
-      types.forEach((type) => {
-        const option = document.createElement("option");
-        option.value = type.toLowerCase();
-        option.textContent = type;
-
-        typeSelect.appendChild(option);
-      });
-
-      services.forEach((service) => {
-        const option = document.createElement("option");
-        option.value = service.toLowerCase();
-        option.textContent = service;
-
-        serviceSelect.appendChild(option);
-      });
-    }
-
-    function loadPaytmentPrefill() {
-      Object.entries(prefillPayment).forEach(([name, value]) => {
-        const field = document.querySelector(`[name="${name}"]`);
-        if (field) {
-          field.value = value;
-        }
-      });
-      postDateEl?.focus();
-    }
-
-    function showToast() {
-      const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastEl);
-      toastBootstrap.show();
-    }
   </script>
+
   <style>
     .modal {
       backdrop-filter: blur(10px);

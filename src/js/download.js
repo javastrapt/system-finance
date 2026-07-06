@@ -40,6 +40,8 @@ ytdlpForm.addEventListener("submit", async (e) => {
   });
 });
 
+async function sendDownlaodRequest
+
 /** ********* LISTENERS ********* */
 
 /** ********* FUNCTIONS ********* */

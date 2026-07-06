@@ -21,50 +21,64 @@ const hero = currentPage.hero;
 
 <BaseLayout title={currentPage.name}>
   <main
-    class='container d-flex w-100 h-100 align-items-start justify-content-between flex-column"'
+    class="container d-flex w-100 h-100 align-items-start justify-content-between flex-column"
   >
     <section class="hero col-12 justify-content-center align-items-start mb-0">
       <article class="page-title col-md-12 text-center">
-        <h1 class="reveal d-1 fw-light display-5">Metronome</h1>
+        <p class="lead reveal d-3">system</p>
+
+        <div class="title-lockup d-inline-block">
+          <hr class="title-rule" />
+          <h1 class="reveal d-1 fw-light display-3">Metronome</h1>
+        </div>
       </article>
     </section>
 
     <section
-      class="metronome col-12 justify-content-between align-items-start reveal d-4"
+      class="metronome col-12 justify-content-between align-items-start reveal d-2"
     >
       <div class="tempo-display text-center">
-        <div class-'glow-container'>
+        <div class="glow-container">
           <div class="glow-orb"></div>
-          <span class="tempo">140</span>
-          <span class="bpm">BPM</span>
+          <span class="tempo reveal d-2">140</span>
+          <span class="bpm reveal d-2">BPM</span>
         </div>
-        <div class="tempo-text mb-4">Allegretto</div>
-        <div class="tempo-settings mb-4">
+        <div class="tempo-text mb-4 reveal d-6">Allegretto</div>
+        <div
+          class="tempo-settings mb-4 w-30 d-flex align-items-center justify-content-between"
+        >
           <div class="tempo-adjust decrease">-</div>
           <input type="range" class="slider" min="20" max="255" step="1" />
           <div class="tempo-adjust increase">+</div>
         </div>
 
-        <div class="start-stop mb-4">START</div>
-        <div class="measures">
-          <div class="subtract-beats stepper">-</div>
-          <div class="measure-count mx-3">4</div>
-          <div class="add-beats stepper">+</div>
+        <div class="start-stop mb-4 reveal d-3">START</div>
+        <div
+          class="measures d-flex align-items-center justify-content-center flex-row"
+        >
+          <div class="meter-header">
+            <h5 class="display-3 fw-light text-center">Meter</h5>
+            <div class="subtract-beats stepper">-</div>
+            <div class="measure-count mx-3">4</div>
+            <div class="add-beats stepper">+</div>
+          </div>
         </div>
       </div>
     </section>
   </main>
-  <script type="module" src="../js/met.js"></script>
+  <script>
+    import "../js/met.js";
+  </script>
+
+  <style>
+    .hero .page-title {
+      grid-column: span 6 / span 6;
+      grid-column-start: 4;
+      grid-row-start: 2;
+    }
+
+    .metronome {
+      grid-column: span 4 / span 4;
+    }
+  </style>
 </BaseLayout>
-
-<style>
-  .hero .page-title {
-    grid-column: span 6 / span 6;
-    grid-column-start: 4;
-    grid-row-start: 2;
-  }
-
-  .metronome {
-    grid-column: span 4 / span 4;
-  }
-</style>
